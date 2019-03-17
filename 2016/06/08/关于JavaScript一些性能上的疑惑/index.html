@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="dRa7uUjGnfmHJfsjwFVkkNWotQK1wdLhTf-53zI3sjM">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="KNkyQ3rJO0">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近作死的用JavaScript去试着做Codeforces上的题,在一道数据范围比较极限的题上栽了跟头(Codeforces Round #354 (Div. 2) - D. Theseus and labyrinth).一道简单的广搜题,结果不是tle就是mle.最后各种调整,终于算是搞过去了,也给我留下了一些关于JS语言上的疑问,希望以后能有时间看看JS引擎,解决这些谜题.  谜题1. Ar">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于JavaScript一些性能上的疑惑">
+<meta property="og:url" content="http://stlighter.github.io/2016/06/08/关于JavaScript一些性能上的疑惑/index.html">
+<meta property="og:site_name" content="ST_Lighterの学习笔记">
+<meta property="og:description" content="最近作死的用JavaScript去试着做Codeforces上的题,在一道数据范围比较极限的题上栽了跟头(Codeforces Round #354 (Div. 2) - D. Theseus and labyrinth).一道简单的广搜题,结果不是tle就是mle.最后各种调整,终于算是搞过去了,也给我留下了一些关于JS语言上的疑问,希望以后能有时间看看JS引擎,解决这些谜题.  谜题1. Ar">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-17T07:48:58.620Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于JavaScript一些性能上的疑惑">
+<meta name="twitter:description" content="最近作死的用JavaScript去试着做Codeforces上的题,在一道数据范围比较极限的题上栽了跟头(Codeforces Round #354 (Div. 2) - D. Theseus and labyrinth).一道简单的广搜题,结果不是tle就是mle.最后各种调整,终于算是搞过去了,也给我留下了一些关于JS语言上的疑问,希望以后能有时间看看JS引擎,解决这些谜题.  谜题1. Ar">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://stlighter.github.io/2016/06/08/关于JavaScript一些性能上的疑惑/">
+
+
+
+
+
+  <title>关于JavaScript一些性能上的疑惑 | ST_Lighterの学习笔记</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3bb1a8f95bdb9fea16a6c2ed9ea3159";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ST_Lighterの学习笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">菜鸟龟速学习中......</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stlighter.github.io/2016/06/08/关于JavaScript一些性能上的疑惑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ST_Lighter">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ST_Lighterの学习笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于JavaScript一些性能上的疑惑</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-08T19:55:33+08:00">
+                2016-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/06/08/关于JavaScript一些性能上的疑惑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2016/06/08/关于JavaScript一些性能上的疑惑/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近作死的用JavaScript去试着做Codeforces上的题,在一道数据范围比较极限的题上栽了跟头(<a href="http://codeforces.com/contest/676/problem/D" target="_blank" rel="noopener">Codeforces Round #354 (Div. 2) - D. Theseus and labyrinth</a>).一道简单的广搜题,结果不是tle就是mle.最后各种调整,终于算是搞过去了,也给我留下了一些关于JS语言上的疑问,希望以后能有时间看看JS引擎,解决这些谜题.</p>
+<hr>
+<h3 id="谜题1-Array的shift-unshift-的等操作复杂度到底是多少"><a href="#谜题1-Array的shift-unshift-的等操作复杂度到底是多少" class="headerlink" title="谜题1. Array的shift()/unshift()的等操作复杂度到底是多少?"></a>谜题1. Array的shift()/unshift()的等操作复杂度到底是多少?</h3><p>广搜一般的实现方法就是使用一个队列存放接下来要搜的点,然而我使用JS中的队列方法shift()居然tle了.由于实在不了解shift()具体实现是怎样的,抱着试一试的心态自己实现了一个队列才解决了tle的问题.难道shift()要移动后面所有的元素,使得其复杂度是O(n)?如果用类似C++的容器实现方式应该会很高效啊.<br><a id="more"></a></p>
+<h3 id="谜题2-如果Array访问-赋值和取值-的位置超过其当前长度-会对其性能造成什么影响"><a href="#谜题2-如果Array访问-赋值和取值-的位置超过其当前长度-会对其性能造成什么影响" class="headerlink" title="谜题2. 如果Array访问(赋值和取值)的位置超过其当前长度,会对其性能造成什么影响?"></a>谜题2. 如果Array访问(赋值和取值)的位置超过其当前长度,会对其性能造成什么影响?</h3><p>另一个造成tle的地方也使我很迷惑.我使用了一个数组用来记录某个点是否访问过,以便剪枝.对于JS来说,不在严格模式下,对越界的空间赋值和访问都是没问题的,数组会自动扩容.利用这个特性,声明了数组直接赋值就行了.然而不给length赋值tle了,手动赋值length却AC了.不知道具体实现是否像C++中一样有”剩余容量”这种设计,有的话不至于这么低效吧.</p>
+<hr>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>查看了V8的源码,单从ArrayShift和ArrayUnshift代码来看每次操作应该是$O(n)$的复杂度.但在实际测试下,当数组大小超过某一个值时,shift耗时暴增,应该底层有其他优化,使得在数据较少时能达到近似$O(1)$的复杂度,需要进一步研究.测试代码如下.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> N = <span class="number">223781</span>;</span><br><span class="line"><span class="keyword">var</span> a_pop = [];</span><br><span class="line"><span class="keyword">var</span> a_shift = [];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        a_pop.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        a_shift.push(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    start = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        a_pop.pop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"Pop Done in "</span> + (<span class="built_in">Date</span>.now() - start));</span><br><span class="line"></span><br><span class="line">    start = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; N; i++) &#123;</span><br><span class="line">        a_shift.shift();</span><br><span class="line">    &#125;</span><br><span class="line">    print(<span class="string">"Shift Done in "</span> + (<span class="built_in">Date</span>.now() - start));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+<p>问题2我只做了简单的测试,现象很复杂,而且直接在V8上跑和在浏览器里跑效果还不太一样(估计是版本的问题).不过可以肯定的是,如果数据较多,且不是有序赋值的话,先定义Array的长度效率会比较高.比如下面代码的访问顺序,不先定义数组总长度就会很慢.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Step = <span class="number">1025</span>;</span><br><span class="line"><span class="keyword">var</span> Loop = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">var</span> N = Step * Loop;</span><br><span class="line"><span class="keyword">var</span> a_setL = [];</span><br><span class="line"><span class="keyword">var</span> a_unsetL = [];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> start = <span class="built_in">Date</span>.now();</span><br><span class="line">    a_setL.length = N;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = Step - <span class="number">1</span>, tmp = <span class="number">0</span>; i &lt; N; tmp += Step, i += Step) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = i; j &gt;= tmp; j--) &#123;</span><br><span class="line">            a_setL[j] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    print(<span class="string">"Set Length Done in "</span> + (<span class="built_in">Date</span>.now() - start));</span><br><span class="line"></span><br><span class="line">    start = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = Step - <span class="number">1</span>, tmp = <span class="number">0</span>; i &lt; N; tmp += Step, i += Step) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = i; j &gt;= tmp; j--) &#123;</span><br><span class="line">            a_unsetL[j] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    print(<span class="string">"Didn't Set Length Done in "</span> + (<span class="built_in">Date</span>.now() - start));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+<p>具体的原理应该和Array随机访问的方式有关,这一点需要进一步研究.</p>
+<hr>
+<h3 id="后记2"><a href="#后记2" class="headerlink" title="后记2"></a>后记2</h3><p>拜读了Jay Conrod的<a href="http://www.jayconrod.com/posts/52/a-tour-of-v8-object-representation" target="_blank" rel="noopener">A tour of V8: object representation</a>(中文版戳<a href="http://newhtml.net/v8-object-representation/" target="_blank" rel="noopener">这里</a>).<br>根据里面的描述,数组通常使用Fast Element, 但如果在远远超过当前数组大小的地方赋值的话,数组会被转成字典模式(访问较慢).这意味着如果需要一个固定大小的数组,而且需要随机访问的话,相比不事先指定长度,或者给数组赋值length,按顺序加length个初始值进去再访问效率更高.因为这样不会使得数组的属性访问变成字典模式(不过如果访问是稀疏的,赋值length个值可能消耗更多,这个看实际情况取舍了)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Step = <span class="number">1025</span>;</span><br><span class="line"><span class="keyword">var</span> Loop = <span class="number">1024</span>;</span><br><span class="line"><span class="keyword">var</span> N = Step * Loop;</span><br><span class="line"><span class="keyword">var</span> a_setL = [];</span><br><span class="line"><span class="keyword">var</span> a_unsetL = [];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">main</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> start = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</span><br><span class="line">        a_setL[i] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = N - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        a_setL[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    print(<span class="string">"Set Length Done in "</span> + (<span class="built_in">Date</span>.now() - start));</span><br><span class="line"></span><br><span class="line">    start = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = N - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        a_unsetL[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    print(<span class="string">"Didn't Set Length Done in "</span> + (<span class="built_in">Date</span>.now() - start));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+<p>嘛,等我再消化消化而且另一个问题有了眉目之后,大概会删掉这篇,另外写一篇总结吧~</p>
+<hr>
+<h3 id="后记3"><a href="#后记3" class="headerlink" title="后记3"></a>后记3</h3><p>卧槽,shift的坑居然在heap的实现里面.在dalao的指引下看了<a href="http://stackoverflow.com/questions/27341352/why-does-a-a-nodejs-array-shift-push-loop-run-1000x-slower-above-array-length-87" target="_blank" rel="noopener">这个</a>.根据Andras的回答,数组的大小不同决定了它在堆里存放的位置.小的数组(我猜是放在年轻分代里)在执行移动元素的操作时,其实在堆中只是移动了指针而已.当大小超过一定数值,数组将会被放到一个用于存放大对象的大对象空间(一页一个对象),而由于内存对齐的原因(大概是页对齐?)不能通过移动指针实现,只能真实的在内存中移动数据,因此效率降低.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/05/Codeforces-Round-353-Div-2/" rel="next" title="Codeforces Round #353 (Div. 2)">
+                <i class="fa fa-chevron-left"></i> Codeforces Round #353 (Div. 2)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/26/算法复杂度基本概念/" rel="prev" title="算法复杂度基本概念">
+                算法复杂度基本概念 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ST_Lighter">
+            
+              <p class="site-author-name" itemprop="name">ST_Lighter</p>
+              <p class="site-description motion-element" itemprop="description">ST_Lighterの学习笔记 - 不想学吉他的小画手不是好程序猿(｀・ω・´)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/STLighter" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:123939775@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/STLighter" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#谜题1-Array的shift-unshift-的等操作复杂度到底是多少"><span class="nav-number">1.</span> <span class="nav-text">谜题1. Array的shift()/unshift()的等操作复杂度到底是多少?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#谜题2-如果Array访问-赋值和取值-的位置超过其当前长度-会对其性能造成什么影响"><span class="nav-number">2.</span> <span class="nav-text">谜题2. 如果Array访问(赋值和取值)的位置超过其当前长度,会对其性能造成什么影响?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后记"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后记2"><span class="nav-number">4.</span> <span class="nav-text">后记2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后记3"><span class="nav-number">5.</span> <span class="nav-text">后记3</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ST_Lighter</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: '1465386933000', 
+            owner: 'STLighter',
+            repo: 'STLighter.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'aae1553f564eae9bad0cd1c7c90c2462522195d4',
+            
+                client_id: '9d8f8a4a92df21c5daba'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

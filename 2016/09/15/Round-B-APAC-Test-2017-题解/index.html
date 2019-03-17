@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="dRa7uUjGnfmHJfsjwFVkkNWotQK1wdLhTf-53zI3sjM">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="KNkyQ3rJO0">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,题解,APAC,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="发现目前博客的流量基本来自APAC的题解, 就来更一发Round B, 依然是D题Large不会的惯例(什么SB惯例).感觉这套题难度比Round A大, 练习的时候我一直拍挂small(大概我最近状态不好吧).  A. Sherlock and Parentheses告诉你L和R, 你要用L个左括号和R个右括号, 组成一个字符串. 问组成的字符串最多有多少个子串是”平衡”的(也就是满足括号匹配的">
+<meta name="keywords" content="算法,题解,APAC">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Round B APAC Test 2017 题解">
+<meta property="og:url" content="http://stlighter.github.io/2016/09/15/Round-B-APAC-Test-2017-题解/index.html">
+<meta property="og:site_name" content="ST_Lighterの学习笔记">
+<meta property="og:description" content="发现目前博客的流量基本来自APAC的题解, 就来更一发Round B, 依然是D题Large不会的惯例(什么SB惯例).感觉这套题难度比Round A大, 练习的时候我一直拍挂small(大概我最近状态不好吧).  A. Sherlock and Parentheses告诉你L和R, 你要用L个左括号和R个右括号, 组成一个字符串. 问组成的字符串最多有多少个子串是”平衡”的(也就是满足括号匹配的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-17T07:48:58.618Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Round B APAC Test 2017 题解">
+<meta name="twitter:description" content="发现目前博客的流量基本来自APAC的题解, 就来更一发Round B, 依然是D题Large不会的惯例(什么SB惯例).感觉这套题难度比Round A大, 练习的时候我一直拍挂small(大概我最近状态不好吧).  A. Sherlock and Parentheses告诉你L和R, 你要用L个左括号和R个右括号, 组成一个字符串. 问组成的字符串最多有多少个子串是”平衡”的(也就是满足括号匹配的">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://stlighter.github.io/2016/09/15/Round-B-APAC-Test-2017-题解/">
+
+
+
+
+
+  <title>Round B APAC Test 2017 题解 | ST_Lighterの学习笔记</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3bb1a8f95bdb9fea16a6c2ed9ea3159";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ST_Lighterの学习笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">菜鸟龟速学习中......</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stlighter.github.io/2016/09/15/Round-B-APAC-Test-2017-题解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ST_Lighter">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ST_Lighterの学习笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Round B APAC Test 2017 题解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-15T15:09:10+08:00">
+                2016-09-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题解/" itemprop="url" rel="index">
+                    <span itemprop="name">题解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/15/Round-B-APAC-Test-2017-题解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2016/09/15/Round-B-APAC-Test-2017-题解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>发现目前博客的流量基本来自APAC的题解, 就来更一发Round B, 依然是D题Large不会的惯例(什么SB惯例).<br>感觉这套题难度比Round A大, 练习的时候我一直拍挂small(大概我最近状态不好吧).</p>
+<hr>
+<h3 id="A-Sherlock-and-Parentheses"><a href="#A-Sherlock-and-Parentheses" class="headerlink" title="A. Sherlock and Parentheses"></a><a href="https://code.google.com/codejam/contest/5254487/dashboard#s=p0" target="_blank" rel="noopener">A. Sherlock and Parentheses</a></h3><p>告诉你<code>L</code>和<code>R</code>, 你要用<code>L</code>个左括号和<code>R</code>个右括号, 组成一个字符串. 问组成的字符串最多有多少个子串是”平衡”的(也就是满足括号匹配的).<br>比如<code>L = 3</code>, <code>R = 2</code>可以组成字符串<code>()()(</code>, 其中子串<code>1-4</code>, <code>1-2</code>和<code>3-4</code>都是”平衡”的, 而且其他组合方式最多也只有<code>3</code>个平衡子串, 因此答案是<code>3</code>.</p>
+<p>其实就全部组成<code>()</code>的样式排在一起, 多余的放在后面就是最优的匹配方法, 因为<code>(())</code>的形式不会比<code>()()</code>更优(前者只有<code>2</code>组平衡, 后者有3组). 将一个<code>()</code>看作一个位置, 起点终点的取法数就是答案.</p>
+<p>复杂度<code>O(1)</code>.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//省略头文件</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">useFile</span><span class="params">(<span class="built_in">string</span> f)</span> </span>&#123;</span><br><span class="line">    freopen((f+<span class="string">".in"</span>).c_str(),<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen((f+<span class="string">".out"</span>).c_str(),<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">&#125;</span><br><span class="line">ll l, r;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gao</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;l,&amp;r);</span><br><span class="line">    l = l&lt;r?l:r;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, l*(l+<span class="number">1</span>)/<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    useFile(<span class="string">"A-large-practice"</span>);</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;++i) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case #%d: "</span>,i);</span><br><span class="line">        gao();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<hr>
+<h3 id="B-Sherlock-and-Watson-Gym-Secrets"><a href="#B-Sherlock-and-Watson-Gym-Secrets" class="headerlink" title="B. Sherlock and Watson Gym Secrets"></a><a href="https://code.google.com/codejam/contest/5254487/dashboard#s=p1" target="_blank" rel="noopener">B. Sherlock and Watson Gym Secrets</a></h3><p>给定<code>A</code>, <code>B</code>, <code>N</code>和<code>K</code>, 问有多少组<code>(i, j)</code>满足$i^A + j^B$能被<code>K</code>整除. 其中<code>i</code>和<code>j</code>为不大于<code>N</code>的正整数, 且<code>i</code>与<code>j</code>不能相等. 这里<code>N</code>的范围较大, Large下$1 ≤ N ≤ 10^{18}$, 而$1 ≤ K ≤ 100000$.</p>
+<p>$i^A + j^B$能被<code>K</code>整除意味着$i^A + j^B mod K = 0$, 其实就只用考虑$i^A mod K$和$j^B mod K$的值就行了. 对于$i^A mod K$的<code>0</code>到<code>K-1</code>每种取值计数, 然后用$j^B mod K$的取值去查询<code>i</code>满足整除条件的计数. 由于<code>N</code>很大, 不能枚举, 我们需要在<code>K</code>的范围内枚举. 由于$(K+1)^A mod K = 1^A mod K$, 对于$i^A mod K$的计数, 我们可知:<br>如果$i ≤ N mod K$, 计数为<code>N/K + 1</code>, 否则为<code>N/K</code>.<br>这样就把<code>i</code>的枚举范围缩小到<code>K</code>.</p>
+<p>当然, 还需要用快速幂计算$i^A mod K$以及去掉<code>i</code>和<code>j</code>相同的情况.</p>
+<p>复杂度<code>O(K*log(max(A, B)))</code>(我代码里用了map, 复杂度会比这个更高一些).</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//省略头文件</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">useFile</span><span class="params">(<span class="built_in">string</span> f)</span> </span>&#123;</span><br><span class="line">    freopen((f+<span class="string">".in"</span>).c_str(),<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen((f+<span class="string">".out"</span>).c_str(),<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">&#125;</span><br><span class="line">ll a, b, n, k;</span><br><span class="line">ll M = <span class="number">1000000007</span>;</span><br><span class="line"><span class="function">ll <span class="title">fastPow</span><span class="params">(ll base, ll x)</span> </span>&#123;</span><br><span class="line">    ll ret = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span>(x) &#123;</span><br><span class="line">        <span class="keyword">if</span>(x&amp;<span class="number">1</span>) &#123;</span><br><span class="line">            ret*=base;</span><br><span class="line">            ret%=k;</span><br><span class="line">        &#125;</span><br><span class="line">        base*=base;</span><br><span class="line">        base%=k;</span><br><span class="line">        x&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret%k;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gao</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld"</span>, &amp;a, &amp;b, &amp;n, &amp;k);</span><br><span class="line">    <span class="built_in">map</span>&lt;ll, ll&gt; ma;</span><br><span class="line">    ll cnt = n/k;</span><br><span class="line">    ll om = n%k;</span><br><span class="line">    ll tmp;</span><br><span class="line">    <span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=k;++i) &#123;</span><br><span class="line">        tmp = fastPow(i, a);</span><br><span class="line">        <span class="keyword">if</span>(i&lt;=om) &#123;</span><br><span class="line">            ma[tmp] += (cnt+<span class="number">1</span>)%M;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ma[tmp] += cnt%M;</span><br><span class="line">        &#125;</span><br><span class="line">        ma[tmp] %= M;</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(ll i=<span class="number">1</span>;i&lt;=k;++i) &#123;</span><br><span class="line">        tmp = (k - fastPow(i, b))%k;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;=om) &#123;</span><br><span class="line">            <span class="keyword">if</span>(fastPow(i, a) == tmp) &#123;</span><br><span class="line">                ans += ma[tmp]*((cnt+<span class="number">1</span>)%M) - (cnt+<span class="number">1</span>)%M;</span><br><span class="line">                ans = (ans%M+M)%M;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ans += ma[tmp]*((cnt+<span class="number">1</span>)%M);</span><br><span class="line">                ans %= M;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(fastPow(i, a) == tmp) &#123;</span><br><span class="line">                ans += ma[tmp]*(cnt%M) - cnt%M;</span><br><span class="line">                ans = (ans%M+M)%M;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                ans += ma[tmp]*(cnt%M);</span><br><span class="line">                ans %= M;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    useFile(<span class="string">"B-large-practice"</span>);</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;++i) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case #%d: "</span>,i);</span><br><span class="line">        gao();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="C-Watson-and-Intervals"><a href="#C-Watson-and-Intervals" class="headerlink" title="C. Watson and Intervals"></a><a href="https://code.google.com/codejam/contest/5254487/dashboard#s=p2" target="_blank" rel="noopener">C. Watson and Intervals</a></h3><p>给一堆整数可以用来计算<code>N</code>个线段, 线段都是闭区间, 问用其中<code>N-1</code>个线段最少覆盖多少个整数点. 其中$1 ≤ N ≤ 500000$.</p>
+<p>乍一看是线段树, 然而这么短时间去写一颗线段树, 你已经输了.</p>
+<p>根据公式可以计算出所有的线段, 然后将这些线段按左端点顺序从左到右排序(左端点相同按右端点从左到右排), 这样我们可以通过维护前面线段覆盖到最右的位置去计算所有线段的覆盖范围.<br>比如前面的线段覆盖到位置<code>x</code>, 当前线段要覆盖<code>l</code>到<code>r</code>. 那么:</p>
+<ol>
+<li>如果<code>r ≤ x</code>则说明前面的线段能够完全覆盖当前线段(因为排序了左端点的缘故), 当前线段不会增加覆盖范围;</li>
+<li>如果<code>x &lt; l</code>说明当前线段和之前的线段覆盖范围不相交, 所以增加的覆盖范围是<code>r - l + 1</code>;</li>
+<li>如果上面两条不满足, 则两者有部分相交, 增加的范围是<code>r - x</code>.</li>
+</ol>
+<p>这样我们枚举去掉的那个线段, 求其他线段的覆盖范围, 就能搞出Small.<br>而要处理Large, 我们可以先计算所有线段的覆盖大小, 再减去每个线段范围里只有他自己覆盖一次的范围中最大的那个. 为了计算每个线段仅有它自己覆盖的范围, 我们可以通过”减法”的方式实现.</p>
+<ol>
+<li>如果当前线段前的线段与当前线段有重合, 那一定能完整覆盖当前线段左侧. 排序后前面的线段左端比当前线段靠前, 因此当前线段的左端一定落在前面线段的覆盖范围中.</li>
+<li>对于后面的线段, 如果右端点在当前线段右端点之后, 则说明这个线段已经覆盖了当前线段的最右侧, 之后的线段不能再覆盖掉更大范围了. 也就是说, 我们计算减法的时候, 只用计算到满足这个条件的第一个线段即可.</li>
+<li>对于当点线段和2中所说的线段之前的线段, 求其覆盖范围, 然后从当前线段的范围里面减去就行. 此外如果删除这些线段中的一个, 减少的值一定为<code>0</code>, 因为当前线段能覆盖他们的覆盖范围. 也就是说, 做减法需要枚举的这些线段不会是答案所要删除的线段.</li>
+</ol>
+<p>综上, 可以直接线性的计算出删除一个线段会减少的覆盖数, 只需要更新当前线段的未被前面线段覆盖的范围, 并从范围内减去后面线段重复覆盖的范围即可, 后面的线段要么可以跳过(完全在其区间内, 减少值一定为0), 要么可以作为下一个当前线段.</p>
+<p>计算出删除每个段减少的覆盖范围后, 找出最大的值, 用总覆盖减去这个值就可以了.</p>
+<p>复杂度<code>O(N*log(N))</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//省略头文件</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">useFile</span><span class="params">(<span class="built_in">string</span> f)</span> </span>&#123;</span><br><span class="line">    freopen((f+<span class="string">".in"</span>).c_str(),<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen((f+<span class="string">".out"</span>).c_str(),<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line">ll l, r, a, b, c1, c2, m;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    ll x,y,m;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(Node &amp;a) <span class="keyword">const</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (x==a.x?y&lt;a.y:x&lt;a.x);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;node[<span class="number">500010</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gao</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%lld%lld%lld%lld%lld%lld%lld"</span>, &amp;n, &amp;l, &amp;r, &amp;a, &amp;b, &amp;c1, &amp;c2, &amp;m);</span><br><span class="line">    node[<span class="number">0</span>].x = l;</span><br><span class="line">    node[<span class="number">0</span>].y = r;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;++i) &#123;</span><br><span class="line">        Node &amp;bf = node[i<span class="number">-1</span>];</span><br><span class="line">        Node &amp;cur = node[i];</span><br><span class="line">        cur.x = (a*bf.x + b*bf.y + c1)%m;</span><br><span class="line">        cur.y = (a*bf.y + b*bf.x + c2)%m;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;++i) &#123;</span><br><span class="line">        Node &amp;cur = node[i];</span><br><span class="line">        <span class="keyword">if</span>(cur.x&gt;cur.y) &#123;</span><br><span class="line">            swap(cur.x, cur.y);</span><br><span class="line">        &#125;</span><br><span class="line">        cur.m = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    sort(node, node+n);</span><br><span class="line">    ll ans = <span class="number">0</span>, last = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(node[i].y &lt;= last)</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">if</span>(node[i].x &gt; last) &#123;</span><br><span class="line">            ans += node[i].y - node[i].x+<span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            ans += node[i].y - last;</span><br><span class="line">        &#125;</span><br><span class="line">        last = node[i].y;</span><br><span class="line">    &#125;</span><br><span class="line">    last = node[<span class="number">0</span>].x - <span class="number">1</span>;</span><br><span class="line">    node[<span class="number">0</span>].m = node[<span class="number">0</span>].y - node[<span class="number">0</span>].x + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> id = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;n;++i) &#123;</span><br><span class="line">        Node &amp;bf = node[id];</span><br><span class="line">        Node &amp;cur = node[i];</span><br><span class="line">        ll lb, rb;</span><br><span class="line">        <span class="keyword">if</span>(cur.y &lt;= bf.y) &#123;</span><br><span class="line">            cur.m = <span class="number">0</span>;</span><br><span class="line">            lb = max(last+<span class="number">1</span>, cur.x);</span><br><span class="line">            rb = cur.y;</span><br><span class="line">            <span class="keyword">if</span>(rb&gt;=lb)</span><br><span class="line">                bf.m -= rb - lb + <span class="number">1</span>;</span><br><span class="line">            last = max(cur.y, last);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(cur.x &gt; bf.y) &#123;</span><br><span class="line">            cur.m = cur.y - cur.x + <span class="number">1</span>;</span><br><span class="line">            id = i;</span><br><span class="line">            last = cur.x - <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            lb = max(last+<span class="number">1</span>, cur.x);</span><br><span class="line">            rb = bf.y;</span><br><span class="line">            bf.m -= rb - lb + <span class="number">1</span>;</span><br><span class="line">            cur.m = cur.y - bf.y;</span><br><span class="line">            last = bf.y;</span><br><span class="line">            id = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ll mtmp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;++i) &#123;</span><br><span class="line">        mtmp = max(mtmp, node[i].m);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans-mtmp);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    useFile(<span class="string">"C-large-practice"</span>);</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;++i) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case #%d: "</span>,i);</span><br><span class="line">        gao();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="D-Sherlock-and-Permutation-Sorting"><a href="#D-Sherlock-and-Permutation-Sorting" class="headerlink" title="D. Sherlock and Permutation Sorting"></a><a href="https://code.google.com/codejam/contest/5254487/dashboard#s=p3" target="_blank" rel="noopener">D. Sherlock and Permutation Sorting</a></h3><p>定义一个操作<code>f</code>, 表示对一个排列进行分块, 能分的最大块数. 分块的依据是: 数字间位置不变, 前一个块的每个数都要小于后一个块的数字. 如<code>f([1,2,3])</code>为<code>3</code>, 可以分成<code>[1][2][3]</code>, 而<code>f([2,1,3])</code>为<code>2</code>, 因为只能分成<code>[2,1][3]</code>.<br>现在给定<code>N</code>和<code>M</code>, 对于<code>N</code>个数字的每种排列求最大分块数, 然后求出他们的平方和模上<code>M</code>.</p>
+<p>我只想出一种<code>O(N^3)</code>的动态规划做法, 由于case数也达到<code>100</code>, 也只能跑跑Small, 复杂度到<code>O(10^8)</code>, 还好是离线跑, 还是挺快的.</p>
+<p>对于一个排列<code>[a,b,c,d,e]</code>, 如果一定要在<code>c</code>分块, 那么<code>a,b,c</code>一定对应<code>1,2,3</code>的一个排列, 而且如果要让<code>[a,b,c]</code>不能再分, 那他们只能对应一个分块数必须为<code>1</code>的排列. 剩下的<code>[d,e]</code>对应<code>[4,5]</code>, 对其分块结果等价于对<code>[1,2]</code>分块.<br>现在我们用<code>dp[i][j]</code>表示长度为<code>i</code>的排列最大分成<code>j</code>块的有多少种. 那么我们可以枚举第一个分块的点<code>k</code>, 这样就有转移:<br><code>dp[i][j] = Sum(dp[k][1]*dp[i-k][j-1])</code><br>即前<code>k</code>个分一块的种类与后<code>i-k</code>个分<code>j-1</code>块的种类相组合.<br>分<code>1</code>块的种数可以用总的排列数减去其他的数量得到.<br>这样<code>dp</code>完成后, 枚举每种分块数对应的种数, 直接计算答案就可以了.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//省略头文件</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">useFile</span><span class="params">(<span class="built_in">string</span> f)</span> </span>&#123;</span><br><span class="line">    freopen((f+<span class="string">".in"</span>).c_str(),<span class="string">"r"</span>,<span class="built_in">stdin</span>);</span><br><span class="line">    freopen((f+<span class="string">".out"</span>).c_str(),<span class="string">"w"</span>,<span class="built_in">stdout</span>);</span><br><span class="line">&#125;</span><br><span class="line">ll dp[<span class="number">110</span>][<span class="number">110</span>];</span><br><span class="line">ll a[<span class="number">110</span>];</span><br><span class="line">ll n,m;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">    dp[<span class="number">1</span>][<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    a[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;++i) &#123;</span><br><span class="line">        a[i]=a[i<span class="number">-1</span>]*i;</span><br><span class="line">        a[i]%=m;</span><br><span class="line">        ll tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;i;++j) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=j;++k) &#123;</span><br><span class="line">                dp[i][k+<span class="number">1</span>] += dp[i-j][<span class="number">1</span>]*dp[j][k];</span><br><span class="line">                dp[i][k+<span class="number">1</span>]%=m;</span><br><span class="line">                tmp += dp[i-j][<span class="number">1</span>]*dp[j][k];</span><br><span class="line">                tmp%=m;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        dp[i][<span class="number">1</span>] = (a[i] - tmp)%m;</span><br><span class="line">        dp[i][<span class="number">1</span>] = (dp[i][<span class="number">1</span>]+m)%m;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">gao</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;n,&amp;m);</span><br><span class="line">    init();</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i) &#123;</span><br><span class="line">        ans += i*i%m*dp[n][i]%m;</span><br><span class="line">        ans%=m;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    useFile(<span class="string">"D-small-practice"</span>);</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;++i) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Case #%d: "</span>,i);</span><br><span class="line">        gao();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/题解/" rel="tag"># 题解</a>
+          
+            <a href="/tags/APAC/" rel="tag"># APAC</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/13/我对JavaScript闭包的一些理解/" rel="next" title="我对JavaScript闭包的一些理解">
+                <i class="fa fa-chevron-left"></i> 我对JavaScript闭包的一些理解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/05/leetcode题解-11-20/" rel="prev" title="leetcode题解(11-20)">
+                leetcode题解(11-20) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ST_Lighter">
+            
+              <p class="site-author-name" itemprop="name">ST_Lighter</p>
+              <p class="site-description motion-element" itemprop="description">ST_Lighterの学习笔记 - 不想学吉他的小画手不是好程序猿(｀・ω・´)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/STLighter" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:123939775@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/STLighter" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#A-Sherlock-and-Parentheses"><span class="nav-number">1.</span> <span class="nav-text">A. Sherlock and Parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-Sherlock-and-Watson-Gym-Secrets"><span class="nav-number">2.</span> <span class="nav-text">B. Sherlock and Watson Gym Secrets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-Watson-and-Intervals"><span class="nav-number">3.</span> <span class="nav-text">C. Watson and Intervals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-Sherlock-and-Permutation-Sorting"><span class="nav-number">4.</span> <span class="nav-text">D. Sherlock and Permutation Sorting</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ST_Lighter</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: '1473923350000', 
+            owner: 'STLighter',
+            repo: 'STLighter.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'aae1553f564eae9bad0cd1c7c90c2462522195d4',
+            
+                client_id: '9d8f8a4a92df21c5daba'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

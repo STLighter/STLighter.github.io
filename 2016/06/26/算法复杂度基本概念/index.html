@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="dRa7uUjGnfmHJfsjwFVkkNWotQK1wdLhTf-53zI3sjM">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="KNkyQ3rJO0">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="内容主要参考《算法导论》(原书第3版) 中第3章:函数的增长.其在第17章中介绍了一些高级的分析方法,用来分析一些复杂问题的复杂度,这里暂时不做介绍,以后有机会另讲.  复杂度简介所谓算法的复杂度,指的是一个算法所需要消耗的资源,通常包含时间资源(时间复杂度)和内存资源(空间复杂度).复杂度是评价算法的重要指标,它直接决定了算法的执行效率.这里以时间复杂度为例.当一个问题的输入规模为$n$时(例如">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法复杂度基本概念">
+<meta property="og:url" content="http://stlighter.github.io/2016/06/26/算法复杂度基本概念/index.html">
+<meta property="og:site_name" content="ST_Lighterの学习笔记">
+<meta property="og:description" content="内容主要参考《算法导论》(原书第3版) 中第3章:函数的增长.其在第17章中介绍了一些高级的分析方法,用来分析一些复杂问题的复杂度,这里暂时不做介绍,以后有机会另讲.  复杂度简介所谓算法的复杂度,指的是一个算法所需要消耗的资源,通常包含时间资源(时间复杂度)和内存资源(空间复杂度).复杂度是评价算法的重要指标,它直接决定了算法的执行效率.这里以时间复杂度为例.当一个问题的输入规模为$n$时(例如">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://stlighter.github.io/uploads/thetaoomega.png">
+<meta property="og:image" content="http://stlighter.github.io/uploads/bubble.jpg">
+<meta property="og:updated_time" content="2019-03-17T07:48:58.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法复杂度基本概念">
+<meta name="twitter:description" content="内容主要参考《算法导论》(原书第3版) 中第3章:函数的增长.其在第17章中介绍了一些高级的分析方法,用来分析一些复杂问题的复杂度,这里暂时不做介绍,以后有机会另讲.  复杂度简介所谓算法的复杂度,指的是一个算法所需要消耗的资源,通常包含时间资源(时间复杂度)和内存资源(空间复杂度).复杂度是评价算法的重要指标,它直接决定了算法的执行效率.这里以时间复杂度为例.当一个问题的输入规模为$n$时(例如">
+<meta name="twitter:image" content="http://stlighter.github.io/uploads/thetaoomega.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://stlighter.github.io/2016/06/26/算法复杂度基本概念/">
+
+
+
+
+
+  <title>算法复杂度基本概念 | ST_Lighterの学习笔记</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3bb1a8f95bdb9fea16a6c2ed9ea3159";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ST_Lighterの学习笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">菜鸟龟速学习中......</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stlighter.github.io/2016/06/26/算法复杂度基本概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ST_Lighter">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ST_Lighterの学习笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法复杂度基本概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-06-26T15:18:04+08:00">
+                2016-06-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/06/26/算法复杂度基本概念/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2016/06/26/算法复杂度基本概念/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>内容主要参考《算法导论》(原书第3版) 中第3章:函数的增长.<br>其在第17章中介绍了一些高级的分析方法,用来分析一些复杂问题的复杂度,这里暂时不做介绍,以后有机会另讲.</p>
+<hr>
+<h3 id="复杂度简介"><a href="#复杂度简介" class="headerlink" title="复杂度简介"></a>复杂度简介</h3><p>所谓算法的复杂度,指的是一个算法所需要消耗的资源,通常包含时间资源(时间复杂度)和内存资源(空间复杂度).复杂度是评价算法的重要指标,它直接决定了算法的执行效率.<br>这里以时间复杂度为例.当一个问题的输入规模为$n$时(例如对一个含有$n$个数的数组排序),通常可以用一个函数$f(n)$表示算法在解决该问题的时候需要的基本操作次数,函数$f(n)$便可以代表一个算法的时间效率(通常我们认为一次基本操作所需的时间是一个常数).<br>比如对插入排序最坏情况的运行效率我们可以用一个多项式刻画:<br>$$f(n) = an^2 + bn + c$$<br>其中$a,b,c$是常量.<br>绝大多数情况下,我们并不需要知道精确的算法效率,而更加关心的是在大输入规模下算法运行时间的增长量级,也就是渐进效率.<br>例如上面的$f(n)$,可以看出当输入规模$n$足够大时,运行时间的增长主要受到$an^2$项的影响,甚至常数$a$本身的影响都可以忽略,因此我们可以用$n^2$来表示这个算法的渐进效率.<br><a id="more"></a></p>
+<hr>
+<h3 id="渐进记号"><a href="#渐进记号" class="headerlink" title="渐进记号"></a>渐进记号</h3><p>当然,我们还需要一些记号来表示渐进效率,我们常听说的$O(n)$等等就是用了其中一个记号.此外还有$\Theta,o,\Omega,\omega$,下面就给出一个形式化的定义:<br>$$\Theta(g(n)) = \{f(n):存在正常量c_1,c_2和n_0,使得对所有n \ge n_0,有0 \le c_1g(n) \le f(n) \le c_2g(n)\}$$<br>$$O(g(n)) = \{f(n):存在正常量c和n_0,使得对所有n \ge n_0,有0 \le f(n) \le cg(n)\}$$<br>$$\Omega(g(n)) = \{f(n):存在正常量c和n_0,使得对所有n \ge n_0,有0 \le cg(n) \le f(n)\}$$<br>$$o(g(n)) = \{f(n):存在任意正常量c和正常量n_0,使得对所有n \ge n_0,有0 \le f(n) \lt cg(n)\}$$<br>$$\omega(g(n)) = \{f(n):存在任意正常量c和正常量n_0,使得对所有n \ge n_0,有0 \le cg(n) \lt f(n)\}$$<br>公式比较抽象,看图来得直观一些(图片来自<a href="http://www.rdfzicc.com/2015/12/05/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1%E7%A4%BE-%E7%AE%97%E6%B3%95%E5%A4%8D%E6%9D%82%E5%BA%A6%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" target="_blank" rel="noopener">这里</a>,和算法导论上的图一样):<br><img src="/uploads/thetaoomega.png" alt="theta-o-omega"><br>简单的说,$\Theta(g(n))$就是有$cg(n)$随着$c$不同的取值,既可以表示$f(n)$的上界,也可以表示$f(n)$的下界.$O(g(n))$意味着只表示上界,$\Omega(g(n))$意味着只表示下界.<br>例如以下式子都是成立的:<br>$$\Theta(n^2) = 2n^2 + 3n + 1$$<br>$$O(n^2) = 2n^2 + 3n + 1$$<br>$$O(n^3) = 2n^2 + 3n + 1$$<br>$$\Omega(n^2) = 2n^2 + 3n + 1$$<br>$$\Omega(n) = 2n^2 + 3n + 1$$<br>$$\Theta(g(n)) = f(n) \Leftrightarrow O(g(n)) = f(n) 且 \Omega(g(n)) = f(n)$$<br>而$o(g(n))$和$\omega(g(n))$意味着不是紧确界,例如有以下式子:<br>$$o(n^2) \neq 2n^2 + 3n + 1$$<br>$$o(n^3) = 2n^2 + 3n + 1$$<br>$$\omega(n^2) \neq 2n^2 + 3n + 1$$<br>$$\omega(n) = 2n^2 + 3n + 1$$<br>关于渐进函数,其有以下性质:<br>1.传递性<br>$$f(n) = \Theta(g(n)) 且 g(n) = \Theta(h(n)) \Rightarrow f(n) = \Theta(h(n))$$<br>$$f(n) = O(g(n)) 且 g(n) = O(h(n)) \Rightarrow f(n) = O(h(n))$$<br>$$f(n) = \Omega(g(n)) 且 g(n) = \Omega(h(n)) \Rightarrow f(n) = \Omega(h(n))$$<br>$$f(n) = o(g(n)) 且 g(n) = o(h(n)) \Rightarrow f(n) = o(h(n))$$<br>$$f(n) = \omega(g(n)) 且 g(n) = \omega(h(n)) \Rightarrow f(n) = \omega(h(n))$$<br>2.自反性<br>$$f(n) = \Theta(f(n))$$<br>$$f(n) = O(f(n))$$<br>$$f(n) = \Omega(f(n))$$<br>3.对称性<br>$$f(n) = \Theta(g(n)) \Leftrightarrow g(n) = \Theta(f(n))$$<br>4.转置对称性<br>$$f(n) = O(g(n)) \Leftrightarrow g(n) = \Omega(f(n))$$<br>$$f(n) = o(g(n)) \Leftrightarrow g(n) = \omega(f(n))$$</p>
+<p>然而,这么多性质对于大多数人来说,除了用来找工作应试之外并·没有·什么·卵·用.</p>
+<hr>
+<h3 id="简单的估算复杂度"><a href="#简单的估算复杂度" class="headerlink" title="简单的估算复杂度"></a>简单的估算复杂度</h3><p>这里以简单的冒泡排序为例.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort</span> (<span class="params">arr</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> n = arr.length, i, j, tmp;</span><br><span class="line">	<span class="keyword">for</span>(i=n<span class="number">-1</span>;i&gt;<span class="number">0</span>;--i) &#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;i;++j) &#123;</span><br><span class="line">			<span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>]) &#123;</span><br><span class="line">				tmp = arr[j+<span class="number">1</span>];</span><br><span class="line">				arr[j+<span class="number">1</span>] = arr[j];</span><br><span class="line">				arr[j] = tmp;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print(bubbleSort([<span class="number">4</span>,<span class="number">43</span>,<span class="number">87</span>,<span class="number">23</span>,<span class="number">56</span>,<span class="number">24</span>,<span class="number">12</span>,<span class="number">1</span>]));</span><br></pre></td></tr></table></figure>
+<p>虽然是JavaScript代码,其实和其他语言也差不多.基本思路就是从后往前枚举数组中每个位置,让这个位置及其之前的数中最大的数”冒”上来.也就是从前往后枚举相邻的数,通过交换让较大的数排在后面.当处理完每个位置,整个数组就是有序的了.<br>第一次冒泡的效果如图所示:<br><img src="/uploads/bubble.jpg" alt="bubble"><br>简单分析一下这个输入规模是$n$(数组大小)算法.我们先看循环内的操作,有$1$次比较和$3$次赋值,而且赋值是否执行是由判断的结果决定的.但不管如何,操作次数是不大于$4$的.<br>然后我们来看循环.当外层循环$i=n-1$的时候$j$可以取$0$到$n-2$($n-1$次),当外层循环$i=n-2$的时候$j$可以取$0$到$n-3$($n-2$此),以此类推.所以循环次数的和可以看成是$1$到$n-1$的等比数列求和,就是$\frac{n(n-1)}{2}$.<br>综合看来,算法的效率可以表示为:<br>$$f(n) = 4 × \frac{n(n-1)}{2} = 2n^2 - 2n$$<br>用渐进记号$O$表达就是(最直观的方法就是把多项式中增长最快的项拿出来,其他项和常数统统扔掉就可以):<br>$$f(n) = \Theta(n^2)$$<br>也就是说,冒泡排序的复杂度是$\Theta(n^2)$,当然满足$O(n^2)$<br>当然前面这些分析其实省略了一些操作,比如n,i,j的赋值,循环结束条件的比较等,但是反正要用渐进记号表示嘛,这些加进来也只是增加常数和低次项而已,最后都要扔掉,加上我又比较懒…<br>嘛,总之我们可以发现,其实影响最终渐进复杂度的只有枚举的次数而已,其他都是常数,通常分析复杂度只要分析枚举的次数就可以了.</p>
+<p>我们再看一个改进版本的冒泡排序.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">bubbleSort2</span> (<span class="params">arr</span>) </span>&#123;</span><br><span class="line">	<span class="keyword">var</span> n = arr.length,</span><br><span class="line">		i,</span><br><span class="line">		j,</span><br><span class="line">		tmp,</span><br><span class="line">		isSwap;</span><br><span class="line">		<span class="keyword">for</span>(i=n<span class="number">-1</span>;i&gt;<span class="number">0</span>;--i) &#123;</span><br><span class="line">			isSwap = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;i;++j)</span><br><span class="line">				<span class="keyword">if</span>(arr[j]&gt;arr[j+<span class="number">1</span>]) &#123;</span><br><span class="line">					tmp = arr[j+<span class="number">1</span>];</span><br><span class="line">					arr[j+<span class="number">1</span>] = arr[j];</span><br><span class="line">					arr[j] = tmp;</span><br><span class="line">					isSwap = <span class="literal">true</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			<span class="keyword">if</span>(!isSwap)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">			</span><br><span class="line">	<span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">print(bubbleSort2([<span class="number">4</span>,<span class="number">43</span>,<span class="number">87</span>,<span class="number">23</span>,<span class="number">56</span>,<span class="number">24</span>,<span class="number">12</span>,<span class="number">1</span>]));</span><br></pre></td></tr></table></figure>
+<p>改动很简单,只是在外层循环加了一个跳出条件:当一轮冒泡时没有执行交换,说明前面所有的数字已经有序了,所以无需进行其他循环.<br>可以很容易发现,当原数组有序的时候,外层循环只需要执行一次就跳出了,因此最好情况下时间复杂度是$\Theta(n)$.同时,如果原数组逆序的话,则成为了最坏情况,复杂度是$\Theta(n^2)$.所以,对于任意规模为$n$的输入,我们都可以称这个算法的复杂度是$O(n^2)$,这意味着不管怎样的输入,算法运行时间的上界是$O(n^2)$.<br>往往我们在分析算法时更关心一个算法运行时间的上界,这也是为什么渐进符号$O$这么常见.</p>
+<p>最后列举几种常见的复杂度:<br>$O(2^n)$ 常见于状态压缩,用二进制的$0$和$1$表示是否存在.<br>$O(n^x)$ 常见于循环,$x$代表有几层循环.<br>$O(log(n))$ 常见于树状结构的查询,某进制下的位枚举或者分段.<br>$O(1)$ 常见于简单公式计算或者简单的判断分支.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/06/08/关于JavaScript一些性能上的疑惑/" rel="next" title="关于JavaScript一些性能上的疑惑">
+                <i class="fa fa-chevron-left"></i> 关于JavaScript一些性能上的疑惑
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/28/最长回文串算法manacher/" rel="prev" title="最长回文串算法manacher">
+                最长回文串算法manacher <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ST_Lighter">
+            
+              <p class="site-author-name" itemprop="name">ST_Lighter</p>
+              <p class="site-description motion-element" itemprop="description">ST_Lighterの学习笔记 - 不想学吉他的小画手不是好程序猿(｀・ω・´)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/STLighter" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:123939775@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/STLighter" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#复杂度简介"><span class="nav-number">1.</span> <span class="nav-text">复杂度简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#渐进记号"><span class="nav-number">2.</span> <span class="nav-text">渐进记号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单的估算复杂度"><span class="nav-number">3.</span> <span class="nav-text">简单的估算复杂度</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ST_Lighter</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: '1466925484000', 
+            owner: 'STLighter',
+            repo: 'STLighter.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'aae1553f564eae9bad0cd1c7c90c2462522195d4',
+            
+                client_id: '9d8f8a4a92df21c5daba'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

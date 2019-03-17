@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="dRa7uUjGnfmHJfsjwFVkkNWotQK1wdLhTf-53zI3sjM">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="KNkyQ3rJO0">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,题解,leetcode,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="摸鱼多日, 来随便更一更. 最近JS写的比较多, 所以以后题解的代码就以JS为主了. 这篇题解写了好久, 主要是后面两题搞得有点复杂, 加上各种学校的事情, 拖着写了个把月QAQ.  21. Merge Two Sorted Lists合并两个有序链表, 链表中数据是从小到大排序的.这有点像归并排序中归并的过程, 只是这个要在链表上进行归并, 思路还是一样的.对两个链表头中的值相互比较, 取值较小">
+<meta name="keywords" content="算法,题解,leetcode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode题解(21-30)">
+<meta property="og:url" content="http://stlighter.github.io/2016/12/23/leetcode题解-21-30/index.html">
+<meta property="og:site_name" content="ST_Lighterの学习笔记">
+<meta property="og:description" content="摸鱼多日, 来随便更一更. 最近JS写的比较多, 所以以后题解的代码就以JS为主了. 这篇题解写了好久, 主要是后面两题搞得有点复杂, 加上各种学校的事情, 拖着写了个把月QAQ.  21. Merge Two Sorted Lists合并两个有序链表, 链表中数据是从小到大排序的.这有点像归并排序中归并的过程, 只是这个要在链表上进行归并, 思路还是一样的.对两个链表头中的值相互比较, 取值较小">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-17T07:48:58.619Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="leetcode题解(21-30)">
+<meta name="twitter:description" content="摸鱼多日, 来随便更一更. 最近JS写的比较多, 所以以后题解的代码就以JS为主了. 这篇题解写了好久, 主要是后面两题搞得有点复杂, 加上各种学校的事情, 拖着写了个把月QAQ.  21. Merge Two Sorted Lists合并两个有序链表, 链表中数据是从小到大排序的.这有点像归并排序中归并的过程, 只是这个要在链表上进行归并, 思路还是一样的.对两个链表头中的值相互比较, 取值较小">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://stlighter.github.io/2016/12/23/leetcode题解-21-30/">
+
+
+
+
+
+  <title>leetcode题解(21-30) | ST_Lighterの学习笔记</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3bb1a8f95bdb9fea16a6c2ed9ea3159";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ST_Lighterの学习笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">菜鸟龟速学习中......</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stlighter.github.io/2016/12/23/leetcode题解-21-30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ST_Lighter">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ST_Lighterの学习笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">leetcode题解(21-30)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-23T21:18:16+08:00">
+                2016-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/题解/" itemprop="url" rel="index">
+                    <span itemprop="name">题解</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/12/23/leetcode题解-21-30/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2016/12/23/leetcode题解-21-30/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>摸鱼多日, 来随便更一更. 最近JS写的比较多, 所以以后题解的代码就以JS为主了. 这篇题解写了好久, 主要是后面两题搞得有点复杂, 加上各种学校的事情, 拖着写了个把月QAQ.</p>
+<hr>
+<h3 id="21-Merge-Two-Sorted-Lists"><a href="#21-Merge-Two-Sorted-Lists" class="headerlink" title="21. Merge Two Sorted Lists"></a><a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" rel="noopener">21. Merge Two Sorted Lists</a></h3><p>合并两个有序链表, 链表中数据是从小到大排序的.<br>这有点像归并排序中归并的过程, 只是这个要在链表上进行归并, 思路还是一样的.<br>对两个链表头中的值相互比较, 取值较小的那个作为新链的下一个节点, 并将取出的链表头向后移动一位, 并继续这一个过程直到两个链表都被遍历.<br>复杂度<code>O(N+M)</code>, <code>N</code>和<code>M</code>为两个链表长度.<br>代码中为了方便我建了一个空节点作为头节点, 并返回了一个新链表, 而没有破坏原先两个链表. 只需要稍微修改一下就能直接使用原先链表的节点.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mergeTwoLists = <span class="function"><span class="keyword">function</span>(<span class="params">l1, l2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> head = <span class="keyword">new</span> ListNode(<span class="number">0</span>); <span class="comment">// 空的头节点</span></span><br><span class="line">    <span class="keyword">let</span> tmp = head; <span class="comment">// 标记链表尾, 方便直接在尾添加</span></span><br><span class="line">    <span class="comment">// 循环直到两个链表都清空</span></span><br><span class="line">    <span class="keyword">while</span>(l1||l2) &#123;</span><br><span class="line">        <span class="keyword">let</span> target; <span class="comment">//新链表的下一个节点值</span></span><br><span class="line">        <span class="comment">// 如果两个节点都存在, 获取其中值小的一个</span></span><br><span class="line">        <span class="keyword">if</span>(l1&amp;&amp;l2) &#123;</span><br><span class="line">            <span class="keyword">if</span>(l1.val&lt;l2.val) &#123;</span><br><span class="line">                target = l1.val;</span><br><span class="line">                l1 = l1.next;   <span class="comment">// 下一个取l1的头, 下一次将比较l1的下一个节点与l2的头的大小</span></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                target = l2.val;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 两个链表中有一个已经遍历完, 其值为null</span></span><br><span class="line">            <span class="keyword">if</span>(l1)&#123;  </span><br><span class="line">                target = l1.val;</span><br><span class="line">                l1 = l1.next;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                target = l2.val;</span><br><span class="line">                l2 = l2.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 将新值加入新链表尾部</span></span><br><span class="line">        tmp.next = <span class="keyword">new</span> ListNode(target);</span><br><span class="line">        tmp = tmp.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head.next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<hr>
+<h3 id="22-Generate-Parentheses"><a href="#22-Generate-Parentheses" class="headerlink" title="22. Generate Parentheses"></a><a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" rel="noopener">22. Generate Parentheses</a></h3><p>给<code>N</code>对小括号, 返回所有合法的括号序列.<br>典型的分治问题. 要保证一个括号序列合法, 其每个括号内的子序列也要是合法. 我们可以根据第一对匹配括号的大小(其中含有的括号数)来枚举.<br>如<code>N = 1</code>有唯一的合法序列<code>()</code>.<br>如<code>N = 2</code>, 则有序列<code>()()</code>和<code>(())</code>. 等价于1对括号加所有<code>N = 1</code>的序列或者1对括号内含<code>N = 1</code>的序列.<br>如<code>N = 3</code>, 我们在1对括号后加上所有<code>N = 2</code>的序列可以得到<code>()()()</code>和<code>()(())</code>;<br>然后我们在1对括号里放所有<code>N = 1</code>的序列, 并在其后加上所有<code>N = 1</code>的序列, 得到<code>(())()</code>;<br>我们在1对括号里放所有<code>N = 2</code>的序列, 则可以得到<code>(()())</code>和<code>((()))</code>.</p>
+<p>即要得到<code>N</code>组括号的序列, 我们可以让<code>i</code>组括号的序列在1对括号内, 再在后面加<code>N - i - 1</code>组括号序列, 于是得到规模为<code>i</code>和<code>N - i - 1</code>的子问题.</p>
+<p>我们用数组记录一下子问题的答案便可以从小到大递推得到答案了. 至于复杂度, 由于答案规模是指数级增加的, 所以复杂度也是指数级的, 比较爆炸.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> generateParenthesis = <span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> dp = <span class="keyword">new</span> <span class="built_in">Array</span>(n + <span class="number">1</span>);  <span class="comment">// 数组记录子问题的答案 </span></span><br><span class="line">    dp[<span class="number">0</span>] = [<span class="string">''</span>];   <span class="comment">// 规模为0的子问题答案</span></span><br><span class="line">    <span class="comment">// 递推1到n每个问题</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        dp[i] = [];</span><br><span class="line">        <span class="comment">// j为第一对括号包含的括号对数(包括自己)</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">1</span>; j &lt;= i; ++j) &#123;</span><br><span class="line">            <span class="comment">// k为需要在后面加上的括号对数</span></span><br><span class="line">            <span class="keyword">let</span> k = i - j;</span><br><span class="line">            <span class="comment">// 枚举两个子问题答案的所有组合</span></span><br><span class="line">            <span class="keyword">for</span>(a <span class="keyword">of</span> dp[j - <span class="number">1</span>]) &#123;</span><br><span class="line">                <span class="keyword">for</span>(b <span class="keyword">of</span> dp[k]) &#123;</span><br><span class="line">                    dp[i].push(<span class="string">'('</span> + a + <span class="string">')'</span> + b);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[n];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="23-Merge-k-Sorted-Lists"><a href="#23-Merge-k-Sorted-Lists" class="headerlink" title="23. Merge k Sorted Lists"></a><a href="https://leetcode.com/problems/merge-k-sorted-lists/" target="_blank" rel="noopener">23. Merge k Sorted Lists</a></h3><p>合并<code>k</code>个有序链表, 链表中数据是从小到大排序的.<br>和21题如出一辙, 就是多路归并的思路. 从所有的头中取最小的一个作为新链表的头. 为了提高选取效率, 可以使用优先队列去实现. JS里面没有优先队列, 所以我手敲了一个, 具体的算法可以去搜索<code>大/小顶推</code>, 网上有许多资料, 《算法导论》中关于堆排序的部分也有讲解.<br>整体复杂度<code>O(Nlog(k))</code>, 其中<code>N</code>为链表中点的总个数, <code>k</code>为链表数.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mergeKLists = <span class="function"><span class="keyword">function</span>(<span class="params">lists</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 优先队列</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">PriorityQueue</span> </span>&#123;</span><br><span class="line">        <span class="keyword">constructor</span>(cmp) &#123;</span><br><span class="line">            <span class="keyword">this</span>.arr = [];  <span class="comment">// 存放实际节点的容器</span></span><br><span class="line">            <span class="keyword">this</span>.cmp = cmp; <span class="comment">// 比较函数, 用于比较节点的大小</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">get</span> size() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.arr.length; <span class="comment">// 队列大小</span></span><br><span class="line">        &#125;</span><br><span class="line">        empty() &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.size === <span class="number">0</span>; <span class="comment">// 队列是否为空</span></span><br><span class="line">        &#125;</span><br><span class="line">        top() &#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.size &gt; <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">this</span>.arr[<span class="number">0</span>]; <span class="comment">// 返回队首(堆顶)</span></span><br><span class="line">        &#125;</span><br><span class="line">        swap(i, j) &#123;</span><br><span class="line">            <span class="comment">// 交换数组中元素i, j的位置</span></span><br><span class="line">            <span class="keyword">let</span> arr = <span class="keyword">this</span>.arr;</span><br><span class="line">            <span class="keyword">let</span> tmp = arr[i];</span><br><span class="line">            arr[i] = arr[j];</span><br><span class="line">            arr[j] = tmp;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        push(o) &#123;</span><br><span class="line">            <span class="comment">// 插入新节点</span></span><br><span class="line">            <span class="keyword">let</span> arr = <span class="keyword">this</span>.arr, </span><br><span class="line">                i = arr.length, <span class="comment">// 新节点角标</span></span><br><span class="line">                p;</span><br><span class="line">            arr.push(o);    <span class="comment">// 加在数组尾部(保持完全二叉树结构)</span></span><br><span class="line">            <span class="keyword">while</span>(i &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="comment">// 维护堆性质, 向上交换直到父节点大于当前节点或当前节点为根</span></span><br><span class="line">                p = <span class="built_in">parseInt</span>((i - <span class="number">1</span>)/<span class="number">2</span>);    <span class="comment">// 父节点角标</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">this</span>.cmp(arr[p], arr[i]) &gt;= <span class="number">0</span>)   <span class="comment">// 当父节点较大则不再交换</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">this</span>.swap(p, i);    <span class="comment">// 父节点较小, 与当前节点交换</span></span><br><span class="line">                i = p;  <span class="comment">// 更新当前节点的实际角标</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        pop() &#123;</span><br><span class="line">            <span class="comment">// 删除队首节点</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.size === <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            <span class="keyword">let</span> arr = <span class="keyword">this</span>.arr,</span><br><span class="line">                cmp = <span class="keyword">this</span>.cmp,</span><br><span class="line">                l = arr.length - <span class="number">1</span>, <span class="comment">// 队尾角标</span></span><br><span class="line">                ret = arr[<span class="number">0</span>],   <span class="comment">// 要删除的节点</span></span><br><span class="line">                i = <span class="number">0</span>,  <span class="comment">// 队首角标</span></span><br><span class="line">                p = <span class="number">1</span>,  <span class="comment">// 队首左二子角标</span></span><br><span class="line">                q = <span class="number">2</span>,  <span class="comment">// 队首右儿子角标</span></span><br><span class="line">                t;</span><br><span class="line">            arr[<span class="number">0</span>] = arr[l];</span><br><span class="line">            arr.pop();  <span class="comment">// 等价于队首队尾交换并移除原队首, 新队首可能不满足性质</span></span><br><span class="line">            <span class="keyword">while</span>(p &lt; l) &#123;</span><br><span class="line">                <span class="comment">// 维护大顶堆性质, 从根开始, 将其与左右儿子中较大的交换并继续向下比较, 直到左右儿子都比其小</span></span><br><span class="line">                <span class="keyword">if</span>(cmp(arr[i], arr[p]) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">                    t = i;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    t = p;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(q &lt; l &amp;&amp; cmp(arr[q], arr[t]) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                    t = q;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(i === t) <span class="comment">// 当父节点为最大的节点</span></span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">this</span>.swap(i, t);    <span class="comment">// 将当前节点与较大的儿子交换</span></span><br><span class="line">                i = t;  <span class="comment">// 更新当前节点角标</span></span><br><span class="line">                p = i*<span class="number">2</span> + <span class="number">1</span>;    <span class="comment">// 更新左二子角标</span></span><br><span class="line">                q = p + <span class="number">1</span>;  <span class="comment">// 更新右儿子角标</span></span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> ret;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> queue = <span class="keyword">new</span> PriorityQueue(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> b.val - a.val;</span><br><span class="line">    &#125;);</span><br><span class="line">    lists.forEach(<span class="function">(<span class="params">list</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(list) &#123;</span><br><span class="line">            queue.push(list);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">let</span> head = <span class="keyword">new</span> ListNode(<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">let</span> tmp = head;</span><br><span class="line">    <span class="keyword">while</span>(!queue.empty()) &#123;</span><br><span class="line">        tmp.next = queue.pop();</span><br><span class="line">        tmp = tmp.next;</span><br><span class="line">        <span class="keyword">if</span>(tmp.next) &#123;</span><br><span class="line">            queue.push(tmp.next);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head.next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="24-Swap-Nodes-in-Pairs"><a href="#24-Swap-Nodes-in-Pairs" class="headerlink" title="24. Swap Nodes in Pairs"></a><a href="https://leetcode.com/problems/swap-nodes-in-pairs/" target="_blank" rel="noopener">24. Swap Nodes in Pairs</a></h3><p>将链表中的元素两两交换, 如<code>1-&gt;2-&gt;3-&gt;4-&gt;5</code>, 则交换<code>1</code>与<code>2</code>和<code>3</code>与<code>4</code>, 多出的<code>5</code>不管, 返回<code>2-&gt;1-&gt;4-&gt;3-&gt;5</code>.<br>简单的递归. 要两两交换所有元素, 等价于先交换除去前两个节点之外的其他节点, 然后再交换前两个节点. 交换其他节点便形成子问题.<br>由于交换后头节点会变化, 最方便的方法就是将新的头结点作为返回值传递.<br>复杂度<code>O(N)</code>.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> swapPairs = <span class="function"><span class="keyword">function</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 递归终止条件, 如果没有节点或者只有一个节点, 则直接返回</span></span><br><span class="line">    <span class="keyword">if</span>(!head) <span class="keyword">return</span> head;  <span class="comment">// 已经到链表末尾, 返回空</span></span><br><span class="line">    <span class="keyword">let</span> tmp = head.next;    <span class="comment">// tmp为当前节点的相邻节点, 即需要与当前节点交换</span></span><br><span class="line">    <span class="keyword">if</span>(!tmp) <span class="keyword">return</span> head;   <span class="comment">// 单节点, 没有相邻节点, 返回原节点</span></span><br><span class="line">    head.next = swapPairs(tmp.next);    <span class="comment">//  递归得到当前节点和其相邻节点之后的链表交换结果, 链在当前节点之后</span></span><br><span class="line">    tmp.next = head;    <span class="comment">// tmp的下一个点设为当前节点, 实现交换, tmp为新的头结点</span></span><br><span class="line">    <span class="keyword">return</span> tmp; <span class="comment">// 返回新的头结点</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="25-Reverse-Nodes-in-k-Group"><a href="#25-Reverse-Nodes-in-k-Group" class="headerlink" title="25. Reverse Nodes in k-Group"></a><a href="https://leetcode.com/problems/reverse-nodes-in-k-group/" target="_blank" rel="noopener">25. Reverse Nodes in k-Group</a></h3><p>上一题的升级版, 给一个链表和一个长度<code>k</code>, 将每连续长度为<code>k</code>链翻转, 尾部长度不足<code>k</code>的部分保持不变.<br>可以先用递归实现一个翻转链表前<code>k</code>个节点的函数.<br>对于<code>1-&gt;2-&gt;3-&gt;4-&gt;5</code>, <code>k = 3</code>, 我们可以先找到<code>3</code>, 并将其前导放到<code>3</code>后得到<code>1-&gt;3-&gt;2-&gt;4-&gt;5</code>, 然后再将<code>3</code>新的前导<code>1</code>放到<code>2</code>后得到<code>3-&gt;2-&gt;1-&gt;4-&gt;5</code>.<br>有了这个函数, 可以先从根节点做一次翻转, 如果翻转完成, 则旧的根节点已经成为第<code>k</code>个节点, 然后继续从其后一个节点开始再做翻转, 直到无需翻转即可.<br>复杂度<code>O(N)</code>.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reverseKGroup = <span class="function"><span class="keyword">function</span>(<span class="params">head, k</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">reverseAll</span>(<span class="params">bf, cur, ct</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// ct为计数值, 当ct为0时表示这个点是需要翻转的链的尾部尾</span></span><br><span class="line">        <span class="keyword">if</span>(!cur) <span class="keyword">return</span> <span class="literal">null</span>;   <span class="comment">// 未满足计数就达到链尾, 说明无需翻转</span></span><br><span class="line">        <span class="keyword">let</span> ret;</span><br><span class="line">        <span class="keyword">if</span>(!ct) &#123;</span><br><span class="line">            <span class="comment">// 需要翻转的链的尾部, 其作为新的头节点</span></span><br><span class="line">            ret = cur;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 从后往前翻转</span></span><br><span class="line">            ret = reverseAll(cur, cur.next, ct - <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(ret &amp;&amp; bf) &#123;</span><br><span class="line">            <span class="comment">// 需要翻转, 将前导节点放到当前节点后面</span></span><br><span class="line">            bf.next = cur.next;</span><br><span class="line">            cur.next = bf;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> ret = <span class="keyword">new</span> ListNode(),</span><br><span class="line">        tmp = ret;</span><br><span class="line">        ret.next = head;</span><br><span class="line">    <span class="keyword">while</span>(head) &#123;</span><br><span class="line">        <span class="comment">// 每k个依此翻转</span></span><br><span class="line">        tmp.next = reverseAll(<span class="literal">null</span>, head, k - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">if</span>(!tmp.next) &#123;</span><br><span class="line">            tmp.next = head;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        tmp = head;</span><br><span class="line">        head = head.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret.next;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="26-Remove-Duplicates-from-Sorted-Array"><a href="#26-Remove-Duplicates-from-Sorted-Array" class="headerlink" title="26. Remove Duplicates from Sorted Array"></a><a href="https://leetcode.com/problems/remove-duplicates-from-sorted-array/" target="_blank" rel="noopener">26. Remove Duplicates from Sorted Array</a></h3><p>去除有序数组中的重复项, 返回新数组长度, 要求只能使用<code>O(1)</code>的额外空间.<br>因为数组有序, 所以相同项一定相邻. 要删除重复项, 只需要判断每一项是否与前一项相同, 相同的话删除即可. 这样对于要保留的项, 我们直接将其移动到合适的位置即可. 因为其一定是往前移动, 所以只需要从前往后枚举, 然后覆盖到原先的数组上即可.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> removeDuplicates = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> l = nums.length,</span><br><span class="line">        p = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; l ; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(nums[i] === nums[i<span class="number">-1</span>])</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        nums[p++] = nums[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> p;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="27-Remove-Element"><a href="#27-Remove-Element" class="headerlink" title="27. Remove Element"></a><a href="https://leetcode.com/problems/remove-element/" target="_blank" rel="noopener">27. Remove Element</a></h3><p>去除有序数组中的指定值的项, 返回新数组长度, 要求只能使用<code>O(1)</code>的额外空间.<br>与上一题类似, 跳过要删除的项, 对于要保留的项直接将其向前覆盖到对应的位置即可.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> removeElement = <span class="function"><span class="keyword">function</span>(<span class="params">nums, val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> l = <span class="number">0</span>;</span><br><span class="line">    nums.forEach(<span class="function">(<span class="params">el</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(el !== val)</span><br><span class="line">            nums[l++] = el;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="28-Implement-strStr"><a href="#28-Implement-strStr" class="headerlink" title="28. Implement strStr()"></a><a href="https://leetcode.com/problems/implement-strstr/" target="_blank" rel="noopener">28. Implement strStr()</a></h3><p>返回一个子串在字符串中的起始角标. 如果不是子串返回<code>-1</code>.<br>字符串匹配问题, JS中有内置方法<code>indexOf()</code>. 就V8引擎来说, 其内部实现比较复杂, 对于不同长度模式串采用不同的算法, 其中对于较长的模式串使用Boyer–Moore–Horspool算法(具体可以查看<a href="https://github.com/v8/v8/blob/master/src/string-search.h" target="_blank" rel="noopener">src/string-search.h</a>).<br>常见的其他字符串匹配算法有<code>KMP</code>, <code>BM</code>和<code>Sunday</code>等, 具体可以去搜索查看相关算法.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> strStr = <span class="function"><span class="keyword">function</span>(<span class="params">haystack, needle</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> haystack.indexOf(needle);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="29-Divide-Two-Integers"><a href="#29-Divide-Two-Integers" class="headerlink" title="29. Divide Two Integers"></a><a href="https://leetcode.com/problems/divide-two-integers/" target="_blank" rel="noopener">29. Divide Two Integers</a></h3><p>不使用乘\除\模运算, 实现两个整数(32位整型)的除法, 如果答案溢出则返回<code>MAX_INT</code>, 即<code>2^31 - 1</code>.<br>能够使用的运算只有位运算和加减法, 因此最基础的想法就是用减法, 看被除数中能减去多少个除数. 然而对于<code>2^31 - 1</code>除以<code>1</code>这样的输入, 直接减必定会超时, 这就需要在减的时候一次能减去多个.<br>一种减的思路是利用二进制, 每次尝试减去<code>2^i</code>个除数. 例如<code>10/2 = 5</code>, 实际我们可以减去的除数为<code>5</code>个, 即<code>2^2 + 2^0</code>个. 在计算除法时, 我们先用<code>10</code>减去<code>4 * 2</code>, 即<code>4</code>个除数, 余下<code>2</code>, 然后还能减去<code>1</code>个除数<code>2</code>, 因此最后答案是<code>4 + 1 = 5</code>.<br>对于不能整除的情况, 如<code>16/3 = 5</code>, 我们可以先减去<code>4</code>个除数, 余下<code>4</code>, 再减去<code>1</code>个除数余下<code>1</code>, 由于无法再减去任何除数, 所以得到的答案也是<code>5</code>.<br>但是由于无法使用乘法, 如何一次性减去<code>2^n</code>个除数呢? 这里就可以利用位移运算. 我们知道, 位运算中的左移相当于乘<code>2</code>, 右移相当于除以<code>2</code>, 因此只需要用位移就可以实现乘法了. 实际我在代码中采用的方法是, 先左移到一个足够大的值, 再每次右移一位, 依次去试减的方式. 在记录结果时, 我采用边加边左移的方式.<br>对于于正负数问题, 以上的讨论都是针对同号的情况(虽然只讨论了两个正数, 但是两个负数实际上是类似的), 异号的情况可以单独将正负号提出来, 直接处理同号的结果, 最后统一处理符号.<br>还有一个小问题在于溢出. 由于整型最小值是<code>-2^31</code>, 而最大值是<code>2^31 - 1</code>, 在遇到如<code>-2^31/-1</code>时, 结果就会超过最大值. 简单的做法就是把除数\被除数\相除结果全部处理成负数, 最后统一处理符号和溢出.<br>整体复杂度<code>O(log(N))</code>, <code>N</code>是相除结果.<br>实际上这种方法可以看做是一种二分的方法, 当然如果可以使用乘法的话, 直接二分最多能够减去多少个除数也是一种解法.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> divide = <span class="function"><span class="keyword">function</span>(<span class="params">dividend, divisor</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(divisor === <span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">Number</span>.NaN;    <span class="comment">// 除0错误, 实际测试数据中没有这种情况</span></span><br><span class="line">    <span class="keyword">const</span> MAX_INT = <span class="number">0x7fffffff</span>; <span class="comment">// 溢出时需要返回的最大值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> isNegative = (dividend &gt;= <span class="number">0</span>) ^ (divisor &gt;= <span class="number">0</span>);  <span class="comment">// 相除结果是否为负</span></span><br><span class="line">    <span class="comment">// 处理成负数相除</span></span><br><span class="line">    dividend = dividend&gt;<span class="number">0</span>?-dividend:dividend;  </span><br><span class="line">    divisor = divisor&gt;<span class="number">0</span>?-divisor:divisor;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 找到最多可以减去的除数</span></span><br><span class="line">    <span class="keyword">let</span> tmp = divisor;</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 如果再左移会导致溢出或者大于被除数, 则当前tmp为最大可以减去的除数</span></span><br><span class="line">        <span class="keyword">if</span>((tmp &lt;&lt; <span class="number">1</span>) &gt;= <span class="number">0</span> || (tmp &lt;&lt; <span class="number">1</span>) &lt; dividend)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        tmp &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> cnt  = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//  尝试减去每个2^i * divisor</span></span><br><span class="line">    <span class="keyword">while</span>(tmp &lt;= divisor) &#123;</span><br><span class="line">        cnt &lt;&lt;= <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 判断是否够减</span></span><br><span class="line">        <span class="keyword">if</span>(tmp &gt;= dividend) &#123;</span><br><span class="line">            dividend -= tmp;    <span class="comment">// 够减则减去</span></span><br><span class="line">            cnt -= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// tmp == -1时再右移依然是-1, 直接退出避免死循环</span></span><br><span class="line">        <span class="keyword">if</span>(tmp == <span class="number">-1</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        tmp &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    cnt = isNegative?cnt:-cnt;  <span class="comment">// 修正正负号</span></span><br><span class="line">    <span class="keyword">return</span> cnt&gt;MAX_INT?MAX_INT:cnt; <span class="comment">// 判断是否溢出, 不同编程语言判断方法不完全相同</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="30-Substring-with-Concatenation-of-All-Words"><a href="#30-Substring-with-Concatenation-of-All-Words" class="headerlink" title="30. Substring with Concatenation of All Words"></a><a href="https://leetcode.com/problems/substring-with-concatenation-of-all-words/" target="_blank" rel="noopener">30. Substring with Concatenation of All Words</a></h3><p>给一组单词和一个字符串, 找到字符串中由这些单词连成的子串的位置. 这些单词的长度相同, 子串可以由这一组单词按一定顺序连成, 且每个单词都只用到一次. 字符串中可能有多个子串满足条件.</p>
+<p>我们用<code>N</code>表示字符串的长度, <code>L</code>表示每个单词的长度, <code>K</code>表示单词的个数.<br>我们可以把原字符串看成是<code>L</code>个不同的分解串. 例如字符串<code>abcdefgdefabc</code>, <code>L = 3</code>, 则可以看成:<code>abc def gde fab</code>, <code>bcd efg def abc</code> 和 <code>cde fgd efa</code>. 其中我们将尾部多余的字符舍去. 显然, 满足答案的子串一定是这几个串中的一段. 如果我们原单词是<code>abc</code>和<code>def</code>, 分别用<code>A</code>和<code>B</code>代表, <code>#</code>表示不属于给定单词, 则这几个串可以看做<code>AB##</code>, <code>##BA</code>, <code>###</code>, 则我们只用找到其中长度为<code>2</code>的每个单词都出现过的子串.<br>要找到这样的子串, 我们首先要对所有单词计数, 以处理同一个单词出现多次的情况. 这个计数值表示了每个单词还有多少次可以使用. 例如, 单词<code>A</code>出现<code>2</code>次, <code>B</code>出现<code>1</code>次(<code>K = 3</code>), 我们要在<code>AAB#BAABBA</code>中找到所有满足这个条件长度为<code>3</code>的子串.<br>我们用一个队列记录可能合法的子串, 将一个分解串中的单词依次进入队列中. 入队单词不为<code>#</code>, 我们就在计数中减去对应单词的计数. 当队列长度达到<code>K</code>, 且都能成功减去计数, 说明对应的计数值都应该为<code>0</code>了, 此时队列中的元素组成一个合法串, 队首元素的位置就是一个答案.<br>同时, 为了继续判断下一个子串, 我们要将队首出队, 并将其对应的单词计数加回去, 然后再加入下一个单词继续判定.<br>当遇到单词<code>#</code>时, 则当前队列中任何一个单词作为开始位置, 所得到的长度为<code>K</code>的子串都会包含单词<code>#</code>, 一定不满足要求. 因此可以将所有元素出队, 并从下一个不为<code>#</code>的单词开始重新入队.<br>当一个计数值会被减为负数时, 说明当前队列中此单词的数量超过给出的数量, 因此队列记录的一定不是一个合法子串, 需要通过出队使其合法. 直接依此将元素出队, 出队时将出队单词的计数值加回去, 直到可以减去刚才入队单词的计数值为止.<br>以上面<code>AAB#BAABBAA</code>为例子. 开始<code>AAB</code>依次入队达到长度<code>K = 3</code>且都能成功减去计数, 因此为一个有效答案. 去除队首得到<code>AB</code>以后加入<code>#</code>, 所有包含<code>#</code>的都不可能是答案, 因此全部出队, 从<code>#</code>后的<code>BAABBAA</code>重新开始. 开头的<code>BAA</code>同理可以满足要求, 是一个有效答案. <code>B</code>出队后, 又加入一个<code>B</code>, 再次满足要求, 即<code>AAB</code>又是一个答案. <code>A</code>出队得到<code>AB</code>, 又加入一个<code>B</code>, 此时<code>B</code>计数已经为<code>0</code>了, 无法再减去(加入后队列中是<code>ABB</code>, 而合法串<code>B</code>只能出现一次), 因此依次出队直到队列中第一个<code>B</code>出队, 然后再将后面的<code>B</code>入队, 此时队列为<code>B</code>. 接着又能依次加入<code>AA</code>, 又得到一个答案.<br>由于每个分解串中的单词只会入队出队一次, 且分解串长度之和为<code>N</code>, 因此用队列找答案的复杂度为<code>O(N)</code>. 然而这里面没有考虑匹配单词的耗时. 如果使用暴力的匹配方法, 对于分解串每个单词要去匹配给定的一组单词, 复杂度退化为<code>O(NKL)</code>. 因此需要一种快速匹配的方法.<br>要在一个字符串中匹配一组单词可以使用AC自动机之类的数据结构, 但是这里所有单词的长度是一样的, 可以用更简单的hash来做.<br>我们使用前缀hash, 这样可以更快的处理出整个字符串中所有指定长度子串的hash值. 一个字符串<code>abc</code>, 则这个字符串的hash值表示为<code>hash(&#39;abc&#39;) = &#39;a&#39; * g^2 + &#39;b&#39; * g^1 + &#39;c&#39; * g^0 % m</code>, 其中<code>&#39;a&#39;</code>,<code>&#39;b&#39;</code>,<code>&#39;c&#39;</code>对应字符串中的字母, 实际计算中每个字母对应一个唯一的数字, <code>g</code>和<code>m</code>都是常数, 为了减少冲突概率通常取素数.<br>这种hash有以下性质:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hash(&apos;abc&apos;) = (hash(&apos;ab&apos;) * g + &apos;c&apos;) % m</span><br><span class="line">hash(&apos;bcd&apos;) = ((hash(&apos;abc&apos;) - (&apos;a&apos; * g^2) % m + m) * g + &apos;d&apos;) % m</span><br></pre></td></tr></table></figure></p>
+<p>其中第二个式子中加上<code>m</code>是为了避免出现负数.<br>这两个性质意味着我们可以用<code>O(N)</code>的复杂度计算得到长度为<code>N</code>的字符串中每个长度为<code>L</code>的子串的hash值. 利用第一个式子可以用<code>O(L)</code>的复杂度算得第一个长度为<code>L</code>的子串的hash, 接着用第二个式子就能用<code>O(1)</code>的复杂度得到下一个子串的hash, 因此获得所有分解串中单词的hash是<code>O(N)</code>的复杂度.<br>另外, 我们还需要对给出的那组单词做hash, 复杂度是<code>O(KL)</code>, 匹配时复杂度<code>O(1)</code>, 因此综合下来算法整体的复杂度是<code>O(N + KL)</code>.<br>在实际的代码中我为了减少冲突的可能性, 使用了双hash. 另外我用JS里面的对象作为map去计数和匹配, 但实际把<code>M1</code>和<code>M2</code>调整小一点, 直接用数组就可以.<br>这种方法如果遇到特殊情况使得hash冲突的话就会出错(比如给无数多个单词), 不过双hash一般很难卡掉的.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> findSubstring = <span class="function"><span class="keyword">function</span>(<span class="params">s, words</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(words.length &lt; <span class="number">1</span> || s.length &lt; words.length * words[<span class="number">0</span>].length) &#123;</span><br><span class="line">        <span class="keyword">return</span> [];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> M1 = <span class="number">10007</span>,</span><br><span class="line">        M2 = <span class="number">10009</span>,</span><br><span class="line">        G1 = <span class="number">31</span>,</span><br><span class="line">        G2 = <span class="number">29</span>;</span><br><span class="line">    <span class="keyword">let</span> map = &#123;&#125;,</span><br><span class="line">        wl = words[<span class="number">0</span>].length;   <span class="comment">// 单词的长度</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算每个单词的hash值</span></span><br><span class="line">    words.forEach(<span class="function">(<span class="params">word</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> hash1 = <span class="number">0</span>, hash2 = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; wl; ++i) &#123;</span><br><span class="line">            hash1 *= G1;</span><br><span class="line">            hash1 += word.charCodeAt(i) - <span class="number">97</span>;</span><br><span class="line">            hash1 %= M1;</span><br><span class="line">            </span><br><span class="line">            hash2 *= G2;</span><br><span class="line">            hash2 += word.charCodeAt(i) - <span class="number">97</span>;</span><br><span class="line">            hash2 %= M2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(map[hash1 * M2 + hash2] !== <span class="literal">undefined</span>)</span><br><span class="line">            ++map[hash1 * M2 + hash2];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            map[hash1 * M2 + hash2] = <span class="number">1</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> topBase1 = <span class="number">1</span>,</span><br><span class="line">        topBase2 = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>; i &lt; wl; ++i) &#123;</span><br><span class="line">        topBase1 *= G1;</span><br><span class="line">        topBase1 %= M1;</span><br><span class="line">        topBase2 *= G2;</span><br><span class="line">        topBase2 %= M2;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> hash1 = <span class="number">0</span>,</span><br><span class="line">        hash2 = <span class="number">0</span>,</span><br><span class="line">        hashArrs = <span class="keyword">new</span> <span class="built_in">Array</span>(wl);   <span class="comment">// 分解串, 每个串由单词的hash值组成</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; wl; ++i) &#123;</span><br><span class="line">        hashArrs[i] = [];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算每个长度为wl的子串的hash, 并将其加入对应的分解串中</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; s.length; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span>(i &gt;= wl) &#123;</span><br><span class="line">            hash1 = (hash1 - (s.charCodeAt(i - wl) - <span class="number">97</span>) * topBase1 % M1 + M1) % M1;</span><br><span class="line">            hash2 = (hash2 - (s.charCodeAt(i - wl) - <span class="number">97</span>) * topBase2 % M2 + M2) % M2;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        hash1 *= G1;</span><br><span class="line">        hash1 += s.charCodeAt(i) - <span class="number">97</span>;</span><br><span class="line">        hash1 %= M1;</span><br><span class="line">        </span><br><span class="line">        hash2 *= G2;</span><br><span class="line">        hash2 += s.charCodeAt(i) - <span class="number">97</span>;</span><br><span class="line">        hash2 %= M2;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(i &gt;= wl - <span class="number">1</span>) &#123;</span><br><span class="line">            hashArrs[(i + <span class="number">1</span>) % wl].push(hash1 * M2 + hash2);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> ret = [], ds = words.length;</span><br><span class="line">    hashArrs.forEach(<span class="function">(<span class="params">hashArr, idx</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> left = <span class="number">0</span>, i = <span class="number">0</span>; i &lt; hashArr.length; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(map[hashArr[i]] !== <span class="literal">undefined</span>) &#123;</span><br><span class="line">                <span class="comment">// 加入队列的单词在给出的单词中</span></span><br><span class="line">                <span class="comment">// 出队使得计数不会减为负数</span></span><br><span class="line">                <span class="keyword">while</span>(map[hashArr[i]] === <span class="number">0</span>) &#123;</span><br><span class="line">                    ++map[hashArr[left]];</span><br><span class="line">                    ++left;</span><br><span class="line">                &#125;</span><br><span class="line">                --map[hashArr[i]];  <span class="comment">// 减去计数</span></span><br><span class="line">                <span class="keyword">if</span>(i - left + <span class="number">1</span> === ds) &#123;</span><br><span class="line">                    <span class="comment">// 长度满足要求, 即找到一个解</span></span><br><span class="line">                    ret.push(left * wl + idx);</span><br><span class="line">                    <span class="comment">// 队首出队</span></span><br><span class="line">                    ++map[hashArr[left]];</span><br><span class="line">                    ++left;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">// 加入队列的单词不是给出的单词, 全部出队并从下一个单词重新开始入队</span></span><br><span class="line">                <span class="keyword">while</span>(left != i) &#123;</span><br><span class="line">                    ++map[hashArr[left]];</span><br><span class="line">                    ++left;</span><br><span class="line">                &#125;</span><br><span class="line">                ++left;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(i === hashArr.length - <span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">// 搜索到分解串末尾, 全部出队还原计数值</span></span><br><span class="line">                <span class="keyword">while</span>(left &lt; hashArr.length) &#123;</span><br><span class="line">                    ++map[hashArr[left]];</span><br><span class="line">                    ++left;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/题解/" rel="tag"># 题解</a>
+          
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/15/Round-C-APAC-Test-2017-题解/" rel="next" title="Round C APAC Test 2017 题解">
+                <i class="fa fa-chevron-left"></i> Round C APAC Test 2017 题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/16/Win10下安装Scrapy/" rel="prev" title="Win10下安装Scrapy">
+                Win10下安装Scrapy <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ST_Lighter">
+            
+              <p class="site-author-name" itemprop="name">ST_Lighter</p>
+              <p class="site-description motion-element" itemprop="description">ST_Lighterの学习笔记 - 不想学吉他的小画手不是好程序猿(｀・ω・´)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/STLighter" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:123939775@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/STLighter" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#21-Merge-Two-Sorted-Lists"><span class="nav-number">1.</span> <span class="nav-text">21. Merge Two Sorted Lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#22-Generate-Parentheses"><span class="nav-number">2.</span> <span class="nav-text">22. Generate Parentheses</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#23-Merge-k-Sorted-Lists"><span class="nav-number">3.</span> <span class="nav-text">23. Merge k Sorted Lists</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#24-Swap-Nodes-in-Pairs"><span class="nav-number">4.</span> <span class="nav-text">24. Swap Nodes in Pairs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#25-Reverse-Nodes-in-k-Group"><span class="nav-number">5.</span> <span class="nav-text">25. Reverse Nodes in k-Group</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#26-Remove-Duplicates-from-Sorted-Array"><span class="nav-number">6.</span> <span class="nav-text">26. Remove Duplicates from Sorted Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#27-Remove-Element"><span class="nav-number">7.</span> <span class="nav-text">27. Remove Element</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#28-Implement-strStr"><span class="nav-number">8.</span> <span class="nav-text">28. Implement strStr()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#29-Divide-Two-Integers"><span class="nav-number">9.</span> <span class="nav-text">29. Divide Two Integers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#30-Substring-with-Concatenation-of-All-Words"><span class="nav-number">10.</span> <span class="nav-text">30. Substring with Concatenation of All Words</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ST_Lighter</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: '1482499096000', 
+            owner: 'STLighter',
+            repo: 'STLighter.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'aae1553f564eae9bad0cd1c7c90c2462522195d4',
+            
+                client_id: '9d8f8a4a92df21c5daba'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

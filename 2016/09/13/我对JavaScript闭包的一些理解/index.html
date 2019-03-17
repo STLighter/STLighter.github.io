@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="dRa7uUjGnfmHJfsjwFVkkNWotQK1wdLhTf-53zI3sjM">
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="KNkyQ3rJO0">
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,Closure,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="面试老被问到闭包相关的问题, 之前也一直答的不是很好. 最近研究了一下闭包相关的一些内容, 以下是我个人的一些理解.  闭包指什么 Closures are functions that refer to independent (free) variables (variables that are used locally, but defined in an enclosing scope)">
+<meta name="keywords" content="JavaScript,Closure">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我对JavaScript闭包的一些理解">
+<meta property="og:url" content="http://stlighter.github.io/2016/09/13/我对JavaScript闭包的一些理解/index.html">
+<meta property="og:site_name" content="ST_Lighterの学习笔记">
+<meta property="og:description" content="面试老被问到闭包相关的问题, 之前也一直答的不是很好. 最近研究了一下闭包相关的一些内容, 以下是我个人的一些理解.  闭包指什么 Closures are functions that refer to independent (free) variables (variables that are used locally, but defined in an enclosing scope)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://stlighter.github.io/uploads/scope1.png">
+<meta property="og:image" content="http://stlighter.github.io/uploads/scope2.png">
+<meta property="og:image" content="http://stlighter.github.io/uploads/scopelink1.png">
+<meta property="og:image" content="http://stlighter.github.io/uploads/scopelink2.png">
+<meta property="og:image" content="http://stlighter.github.io/uploads/IEScope.png">
+<meta property="og:image" content="http://stlighter.github.io/uploads/ChromeScope.png">
+<meta property="og:updated_time" content="2019-03-17T07:48:58.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我对JavaScript闭包的一些理解">
+<meta name="twitter:description" content="面试老被问到闭包相关的问题, 之前也一直答的不是很好. 最近研究了一下闭包相关的一些内容, 以下是我个人的一些理解.  闭包指什么 Closures are functions that refer to independent (free) variables (variables that are used locally, but defined in an enclosing scope)">
+<meta name="twitter:image" content="http://stlighter.github.io/uploads/scope1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://stlighter.github.io/2016/09/13/我对JavaScript闭包的一些理解/">
+
+
+
+
+
+  <title>我对JavaScript闭包的一些理解 | ST_Lighterの学习笔记</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a3bb1a8f95bdb9fea16a6c2ed9ea3159";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ST_Lighterの学习笔记</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">菜鸟龟速学习中......</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://stlighter.github.io/2016/09/13/我对JavaScript闭包的一些理解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ST_Lighter">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ST_Lighterの学习笔记">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">我对JavaScript闭包的一些理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-13T12:14:35+08:00">
+                2016-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/09/13/我对JavaScript闭包的一些理解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2016/09/13/我对JavaScript闭包的一些理解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>面试老被问到闭包相关的问题, 之前也一直答的不是很好. 最近研究了一下闭包相关的一些内容, 以下是我个人的一些理解.</p>
+<hr>
+<h3 id="闭包指什么"><a href="#闭包指什么" class="headerlink" title="闭包指什么"></a>闭包指什么</h3><blockquote>
+<p>Closures are functions that refer to independent (free) variables (variables that are used locally, but defined in an enclosing scope). In other words, these functions ‘remember’ the environment in which they were created.</p>
+</blockquote>
+<p>这段话来自<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">MDN - Closures(Last updated by: SphinxKnight, Sep 8, 2016, 1:06:52 AM)</a>, 简单的说就是: <code>当一个函数中使用了其他作用域中的变量, 它就是一个闭包. 闭包能够&quot;记住&quot;其创建时所在的环境</code>.</p>
+<p>下面还有一段解释:</p>
+<blockquote>
+<p>A closure is a special kind of object that combines two things: a function, and the environment in which that function was created. The environment consists of any local variables that were in-scope at the time that the closure was created.</p>
+</blockquote>
+<p>这里说<code>闭包是含有一个函数以及创建时所处环境的对象</code>.</p>
+<p>可以看出, MDN上对闭包的指代并不明确, 并不知道是指代函数还是函数加创建环境所组成的对象.</p>
+<p>《JavaScript高级程序设计》中对闭包的解释是:</p>
+<blockquote>
+<p>闭包是指有权访问另一个函数作用域中的变量的函数</p>
+</blockquote>
+<p>其后对闭包的详细描述也都是将函数视为闭包的.<br>结合网络上其他的一些解释, 我认为:<code>闭包指的是一个函数</code>.<br>当然, 这个函数需要能”记住”创建时所在环境, 具体细节后面会讨论.<br><a id="more"></a></p>
+<h3 id="如何产生闭包"><a href="#如何产生闭包" class="headerlink" title="如何产生闭包"></a>如何产生闭包</h3><p>这里使用《JavaScript高级程序设计》中的例子.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createComparisonFunction</span>(<span class="params">propertyName</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">object1, object2</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> value1 = object1[propertyName];</span><br><span class="line">        <span class="keyword">var</span> value2 = object2[propertyName];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(value1 &lt; value2) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(value1 &gt; value2) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> compareNames = createComparisonFunction(<span class="string">"name"</span>);</span><br><span class="line"><span class="keyword">var</span> result = compareNames(&#123;<span class="attr">name</span>: <span class="string">"Nicholas"</span>&#125;, &#123;<span class="attr">name</span>: <span class="string">"Greg"</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>这段代码中, <code>createComparisonFunction</code>内的匿名函数能够访问执行<code>createComparisonFunction</code>时<code>createComparisonFunction</code>内的变量<code>propertyName</code>, 也就满足了<code>访问其他作用域中变量</code>这个条件, 因此这个匿名函数就是一个闭包.</p>
+<p>大多讲解闭包的资料上都使用的类似的代码, 有些资料上在解释的时候认为<code>返回内部的匿名函数</code>也是一个特点, 造成<code>需要返回内部函数才叫闭包</code>的误解.</p>
+<p>实际上, 目前JavaScript引擎还不会去检测一个函数是否真的会被使用到, 因此只要创建函数, 这个函数就会”记住”自己创建时的环境, 无论这个函数是否会返回或者被用到, 也就产生了(至少对JS引擎来说)闭包. 比如以下代码执行也会产生闭包.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createComparisonFunction</span>(<span class="params">propertyName</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 这个函数也是闭包, 即使没有被使用过</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">compareNames</span>(<span class="params">object1, object2</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> value1 = object1[propertyName];</span><br><span class="line">        <span class="keyword">var</span> value2 = object2[propertyName];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(value1 &lt; value2) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(value1 &gt; value2) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 可执行代码, 在debugger处查看compareNames的&lt;function scope&gt;</span></span><br><span class="line">    <span class="keyword">debugger</span>;</span><br><span class="line">&#125;</span><br><span class="line">createComparisonFunction(<span class="string">"name"</span>);</span><br></pre></td></tr></table></figure>
+<p>代码中<code>compareNames</code>函数既没有被返回, 也没有被使用, 但在Chrome下, 我们都能观察到<code>compareNames</code>的<code>&lt;function scope&gt;</code>中包含有<code>propertyName</code>, 也就”记住”了其创建时的环境, 成为了闭包. 这个闭包与第一份代码的闭包没有什么区别, 只是因为闭包没有被持续引用(<code>createComparisonFunction</code>执行结束以后, 其活动对象不再被引用, <code>compareNames</code>也随之不再被引用), 所以内存可以被回收.</p>
+<h3 id="闭包如何”记住”创建时的环境"><a href="#闭包如何”记住”创建时的环境" class="headerlink" title="闭包如何”记住”创建时的环境"></a>闭包如何”记住”创建时的环境</h3><p>从上面的描述中可以知道, 闭包在函数创建时就产生了, 那么他是通过什么方式来”记住”当前环境的呢? 答案就是<code>作用域链</code>.<br>先来看看什么是作用域链.<br>在函数对象创建时, 会在<code>[[Scope]]</code>属性中保存当前执行环境的作用域链, 全局执行环境的作用域链只有全局变量对象(执行环境和变量对象是不同的东西, 变量都是放在变量对象中的).<br>当函数在执行时, 会创建一个新的执行环境, 执行环境的作用域链将会指向一个作用域链对象. 这个作用域链对象从函数的<code>[[Scope]]</code>拷贝而来, 并且会在其前端加入一个新的活动对象, 用于存放参数等变量(也就是当前函数执行的作用域).<br>我们看下面的代码:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">debugger</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="keyword">debugger</span>;</span><br><span class="line">foo();</span><br></pre></td></tr></table></figure>
+<p><img src="/uploads/scope1.png" alt="debugger-1"></p>
+<p>在<code>1</code>处的<code>debugger</code>我们能够观察到当前执行环境(<code>Window</code>)的作用域链(图中<code>Scope</code>部分)中只有<code>Global: Window</code>. 同时, <code>foo</code>的<code>&lt;function scope&gt;</code>与当前执行环境的作用域链相同.</p>
+<p><img src="/uploads/scope2.png" alt="debugger-2"></p>
+<p>当继续执行到<code>2</code>处, 这时当前执行环境为<code>foo</code>, 可以看到<code>Scope</code>下多了<code>Local</code>, 这里的<code>Local</code>就是<code>foo</code>的活动对象. 实际的作用域链如下(this其实指向了window, 这里并没有画出):</p>
+<p><img src="/uploads/scopelink1.png" alt="scope"></p>
+<p>有了作用域链对象, 函数执行时便可以从前往后访问作用域之外的变量了.<br>再看一个复杂一点的例子:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"ST_Lighter"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">prefix</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> prefix + name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o = foo();</span><br><span class="line">o(<span class="string">"My name is "</span>);</span><br></pre></td></tr></table></figure>
+<p>动手画一画作用域链吧(我这里略去全局执行环境).</p>
+<p><img src="/uploads/scopelink2.png" alt="scope"></p>
+<p>在IE中通过<code>debugger</code>观察, 可以看到完整的作用域链, 以及链上对象所包含的变量. 然而在Chrome中, 结果却不完全相同.<br>使用下面的代码进行调试:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> name = <span class="string">"ST_Lighter"</span>;</span><br><span class="line">    <span class="keyword">var</span> blog = <span class="string">"http://stlighter.github.io"</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">bar</span>(<span class="params">prefix</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">debugger</span>;</span><br><span class="line">        <span class="keyword">return</span> prefix + name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> o = foo();</span><br><span class="line">o(<span class="string">"My name is "</span>);</span><br></pre></td></tr></table></figure>
+<p>这是我在IE10中的结果, 可以看到完整的作用域链, 链上包含了<code>foo</code>的活动对象.</p>
+<p><img src="/uploads/IEScope.png" alt="Scope in IE"></p>
+<p>而在Chrome中, 作用域链上并没有完整的<code>foo</code>活动对象, 没有被使用过的变量<code>blog</code>不见了.</p>
+<p><img src="/uploads/ChromeScope.png" alt="Scope in Chrome"></p>
+<p>这是因为V8对闭包进行了优化. V8并不是将整个活动对象装进作用域链, 而是在函数执行时创建一个<code>Context</code>, 会被下面创建的函数所使用的变量将被放入<code>Context</code>(也还有其他方法让变量进入<code>Context</code>). 当创建函数时, 作用域链前端不是当前执行函数的活动对象, 而是<code>Context</code>. 更详细内容请参考<a href="http://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun.html" target="_blank" rel="noopener">Grokking V8 closures for fun (and profit?)</a>.<br>V8这样做是为了更有效的回收无用的对象, 释放内存空间.</p>
+<h3 id="再看闭包定义"><a href="#再看闭包定义" class="headerlink" title="再看闭包定义"></a>再看闭包定义</h3><p>我们现在已经了解了作用域链, 现在我们再看回头看闭包的定义.</p>
+<blockquote>
+<p>闭包是指有权访问另一个函数作用域中的变量的函数</p>
+</blockquote>
+<p>那么如果一个变量在作用域链上, 但是函数没有访问它, 这个函数算<code>有权访问</code>么(MDN上的用词表现出闭包需要直接访问作用域外的变量)? 再者, 全局作用域算作<code>另一个函数作用域</code>么? 那如果访问的是ES6中的块级作用域呢?</p>
+<p>关于<code>有权访问</code>, 我们通过前面的测试就可以知道, 在IE下函数没必要一定要访问自己函数作用域外的变量, 函数的作用域链一定会包含完整的活动对象, 形成闭包. 而在Chrome下, 是否形成闭包则要看变量有没有被任何函数(没错, 是任何函数, 即使当前函数没有访问, 其他函数访问了, 这个变量依然会在当前函数的作用域链中出现, 形成闭包. 因为在同一作用域下创建的函数共享一个<code>Context</code>对象)访问. 也就是不同浏览器的闭包其实有差异.<br>关于<code>另一个函数作用域</code>, 我个人的看法是, 通常被称作闭包的函数, 作用域链中需要有一个非全局对象的活动对象. 也就是说, 作用域链上只有全局对象的函数不能称为闭包. 全局对象与其他活动对象细微的差异在于, 其他活动对象执行代码过程中创建的, 需要进行垃圾回收, 而全局对象在运行期间不需要进行回收. 当这些活动对象被作用域链引用, 就形成了闭包, 也在一定程度上造成了内存的消耗. 而ES6的块级作用域的确会实实在在的形成闭包, 所以如果要加上ES6的讨论的话这里<code>另一个函数作用域</code>是不准确的(嘛, 高程主要还是在ES5的前提下进行讨论的, 这样写也无可厚非).</p>
+<p>最后, 我得出的结论是:</p>
+<blockquote>
+<p>函数的作用域中含有全局对象之外的对象, 这个函数就是一个闭包.</p>
+</blockquote>
+<h3 id="闭包与内存回收"><a href="#闭包与内存回收" class="headerlink" title="闭包与内存回收"></a>闭包与内存回收</h3><p>前面我们提到, 创建一个函数时, 这个函数的<code>[[Scope]]</code>下会保存创建时的作用域链, 由于这个作用域链会引用当前活动对象(或者一个<code>Contex</code>), 这就导致了这些对象的内存不能够被回收, 直到这个函数本身不再被引用.<br><a href="http://point.davidglasser.net/2013/06/27/surprising-javascript-memory-leak.html" target="_blank" rel="noopener">A surprising JavaScript memory leak found at Meteor</a>中展示了一种闭包导致的内存溢出.<br>简单的说, 只要对闭包使用<code>setInterval</code>都会导致其作用域链上的活动对象持续被引用, 无法被释放.</p>
+<p>要确保内存能够被回收, 我们需要能够清楚的识别闭包, 并在不需要使用时取消对闭包的引用.</p>
+<hr>
+<p>参考资料:<br><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" target="_blank" rel="noopener">MDN Closures</a><br><a href="https://book.douban.com/subject/10546125/" target="_blank" rel="noopener">JavaScript高级程序设计（第3版）</a><br><a href="http://mrale.ph/blog/2012/09/23/grokking-v8-closures-for-fun.html" target="_blank" rel="noopener">Grokking V8 closures for fun (and profit?)</a><br><a href="http://point.davidglasser.net/2013/06/27/surprising-javascript-memory-leak.html" target="_blank" rel="noopener">A surprising JavaScript memory leak found at Meteor</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/Closure/" rel="tag"># Closure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/12/CSS多行文字水平垂直居中的几种方式/" rel="next" title="CSS多行文字水平垂直居中的几种方式">
+                <i class="fa fa-chevron-left"></i> CSS多行文字水平垂直居中的几种方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/15/Round-B-APAC-Test-2017-题解/" rel="prev" title="Round B APAC Test 2017 题解">
+                Round B APAC Test 2017 题解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="ST_Lighter">
+            
+              <p class="site-author-name" itemprop="name">ST_Lighter</p>
+              <p class="site-description motion-element" itemprop="description">ST_Lighterの学习笔记 - 不想学吉他的小画手不是好程序猿(｀・ω・´)</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/STLighter" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:123939775@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com/STLighter" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包指什么"><span class="nav-number">1.</span> <span class="nav-text">闭包指什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何产生闭包"><span class="nav-number">2.</span> <span class="nav-text">如何产生闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包如何”记住”创建时的环境"><span class="nav-number">3.</span> <span class="nav-text">闭包如何”记住”创建时的环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#再看闭包定义"><span class="nav-number">4.</span> <span class="nav-text">再看闭包定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包与内存回收"><span class="nav-number">5.</span> <span class="nav-text">闭包与内存回收</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ST_Lighter</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: '1473740075000', 
+            owner: 'STLighter',
+            repo: 'STLighter.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: 'aae1553f564eae9bad0cd1c7c90c2462522195d4',
+            
+                client_id: '9d8f8a4a92df21c5daba'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
